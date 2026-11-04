@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-04T21:57:46.059Z",
+        "reason": "Claude triage: hero is a full-bleed split layer with absolutely positioned copy inset by --gut; cases list is a ruled list whose rows already carry 18-30px vertical padding. Not confirmed by user."
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-04T22:44:57.101Z",
+        "reason": "Claude triage: the page ground is white (#fff), not dark; the radial gradients are the static fallback for the WebGL smoke (touch, reduced motion, no WebGL2). Not confirmed by user."
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-04T23:16:23.038Z",
+        "reason": "Claude triage: only display type is set tight (the 4.6rem scroll statement at 1.14 and the section headings at 1.05); body text is 1.5+. Not confirmed by user."
+      }
+    ]
+  }
+}

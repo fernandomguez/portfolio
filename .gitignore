@@ -1,0 +1,13 @@
+# Original photo and reference images (not published)
+fuente/
+# Browser-test and review captures
+.playwright-mcp/
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/questions/
+# Local Claude settings
+.claude/
+# OS and editor
+.DS_Store
+Thumbs.db
+.impeccable/hook.cache.json

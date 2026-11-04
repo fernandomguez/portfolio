@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-04T00:00:00Z",
+  "title": "Design System: Fernando Mínguez Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "primary", "displayName": "Cool Ink", "canonical": "#1f2328", "tonalRamp": ["#0b0d0f", "#14171a", "#1f2328", "#3a4048", "#5b6472", "#7b8494", "#b4bcc9", "#e4e7ec"] },
+      "coral": { "role": "secondary", "displayName": "Coral Smoke", "canonical": "#F28B82", "tonalRamp": ["#6b1f19", "#a63c33", "#d65c52", "#F28B82", "#f5a39c", "#f8bbb6", "#fad3cf", "#fdebe9"] },
+      "sun": { "role": "secondary", "displayName": "Sun Smoke", "canonical": "#F9C74F", "tonalRamp": ["#5e4300", "#936a07", "#c79a1c", "#F9C74F", "#fad272", "#fcdf96", "#fdebb9", "#fef6dd"] },
+      "teal": { "role": "secondary", "displayName": "Teal Smoke", "canonical": "#7FCFC6", "tonalRamp": ["#0f4a44", "#1f7a71", "#4aa89e", "#7FCFC6", "#98dbd3", "#b2e5df", "#cbeeea", "#e5f7f5"] },
+      "blue": { "role": "secondary", "displayName": "Focus Blue", "canonical": "#6C8EF5", "tonalRamp": ["#14246b", "#2a449f", "#476bd6", "#6C8EF5", "#8aa5f7", "#a8bcf9", "#c6d3fb", "#e3e9fd"] },
+      "band": { "role": "neutral", "displayName": "Pale Band", "canonical": "#f7f8fa", "tonalRamp": ["#5b6472", "#7b8494", "#b4bcc9", "#e4e7ec", "#eef0f4", "#f3f4f7", "#f7f8fa", "#ffffff"] },
+      "thumb-tile": { "role": "neutral", "displayName": "Thumb Tile", "canonical": "#eef0f4", "tonalRamp": ["#7b8494", "#b4bcc9", "#d3d8e0", "#e4e7ec", "#eef0f4", "#f3f4f7", "#f7f8fa", "#ffffff"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Hero Word", "purpose": "The two hero words, sized by container width." },
+      "headline": { "displayName": "Section Heading", "purpose": "Centred display-weight section heading." },
+      "title": { "displayName": "Card Title", "purpose": "Project card titles." },
+      "body": { "displayName": "Body", "purpose": "Page default and card text." },
+      "label": { "displayName": "Quiet Link", "purpose": "Links with arrows and card links." },
+      "mono": { "displayName": "Stack Mono", "purpose": "Code, stack lines and repo names only." }
+    },
+    "shadows": [
+      { "name": "shadow", "value": "0 1px 3px rgba(31,35,40,.12), 0 1px 2px rgba(31,35,40,.06)", "purpose": "Rest: cards, minis, hint pill." },
+      { "name": "shadow-up", "value": "0 12px 30px rgba(31,35,40,.10), 0 2px 6px rgba(31,35,40,.06)", "purpose": "Lift: hovered linked cards, tech chips." },
+      { "name": "grip", "value": "0 6px 18px rgba(31,35,40,.22), 0 1px 3px rgba(31,35,40,.3)", "purpose": "Seam grip only." },
+      { "name": "hairline", "value": "0 1px 0 #e4e7ec", "purpose": "Nav, hero and footer edges." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(.16,1,.3,1)", "purpose": "All transitions: lift, scale, parallax, smoke fade." },
+      { "name": "code-line", "value": "10s infinite, 0.6s stagger", "purpose": "Code lines type in, hold, fade out." },
+      { "name": "chip-bob", "value": "5s-7.5s ease-in-out infinite, 8px", "purpose": "Floating tech chips." }
+    ],
+    "breakpoints": [
+      { "name": "code-hide", "value": "1180px" },
+      { "name": "mobile", "value": "720px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Nav CTA",
+      "kind": "button",
+      "refersTo": "nav-cta",
+      "description": "Single pill button in the nav.",
+      "html": "<a class=\"ds-cta\" href=\"#\">Contacto</a>",
+      "css": ".ds-cta{display:inline-block;background:var(--ink,#1f2328);color:#fff;padding:9px 18px;border-radius:99px;font-weight:600;text-decoration:none;transition:background .3s cubic-bezier(.16,1,.3,1)} .ds-cta:hover{background:#000} .ds-cta:focus-visible{outline:3px solid #6C8EF5;outline-offset:3px}"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Main project card with grey thumbnail tile and mono stack line.",
+      "html": "<a class=\"ds-card\" href=\"#\"><div class=\"ds-thumb\"></div><div class=\"ds-body\"><div class=\"ds-title\">Trazen</div><div class=\"ds-meta\">Proyecto personal</div><div class=\"ds-stack\">Angular · Spring Boot</div></div></a>",
+      "css": ".ds-card{display:flex;flex-direction:column;width:280px;padding:10px 10px 4px;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(31,35,40,.12),0 1px 2px rgba(31,35,40,.06);text-decoration:none;color:#1f2328;transition:translate .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1)} .ds-card:hover{translate:0 -4px;box-shadow:0 12px 30px rgba(31,35,40,.10),0 2px 6px rgba(31,35,40,.06)} .ds-thumb{height:140px;border-radius:8px;background:#eef0f4} .ds-body{display:flex;flex-direction:column;gap:6px;padding:16px 10px 14px} .ds-title{font-size:1.3rem;font-weight:700;letter-spacing:-.02em;line-height:1.15} .ds-meta{font-size:.9rem;color:#5b6472} .ds-stack{font:500 .76rem/1.4 ui-monospace,Consolas,monospace;color:#5b6472;padding-top:10px}"
+    },
+    {
+      "name": "Project Mini",
+      "kind": "card",
+      "refersTo": "project-mini",
+      "description": "Compact item in Más proyectos; unlinked variant has no hover.",
+      "html": "<div class=\"ds-mini\"><span class=\"ds-name\">daw-movies</span><span class=\"ds-desc\">Práctica de clase</span></div>",
+      "css": ".ds-mini{display:flex;flex-direction:column;gap:3px;width:260px;padding:14px 16px;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(31,35,40,.12),0 1px 2px rgba(31,35,40,.06)} .ds-name{font:600 .9rem/1.3 ui-monospace,Consolas,monospace;color:#1f2328} .ds-desc{font-size:.9rem;color:#5b6472}"
+    },
+    {
+      "name": "Tech Chip",
+      "kind": "chip",
+      "refersTo": "tech-chip",
+      "description": "Floating white squircle with a brand-coloured glyph.",
+      "html": "<span class=\"ds-chip\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 2l9 5v10l-9 5-9-5V7z\"/></svg></span>",
+      "css": ".ds-chip{display:grid;place-items:center;width:3em;height:3em;font-size:16px;border-radius:28%;background:#fff;color:#DD0031;box-shadow:0 12px 30px rgba(31,35,40,.10),0 2px 6px rgba(31,35,40,.06);animation:ds-bob 5.5s ease-in-out infinite} .ds-chip svg{width:56%;height:56%;fill:currentColor} @keyframes ds-bob{50%{translate:0 -8px}}"
+    },
+    {
+      "name": "Seam Grip",
+      "kind": "custom",
+      "refersTo": "seam-grip",
+      "description": "Pill grip with chevrons and the Arrastra hint, sits on the neck.",
+      "html": "<div class=\"ds-seam\"><span class=\"ds-hint\">Arrastra</span><span class=\"ds-grip\">‹ ›</span></div>",
+      "css": ".ds-seam{display:flex;flex-direction:column-reverse;align-items:center;gap:8px} .ds-grip{display:grid;place-items:center;width:64px;height:44px;border-radius:99px;background:#fff;color:#1f2328;box-shadow:0 6px 18px rgba(31,35,40,.22),0 1px 3px rgba(31,35,40,.3)} .ds-hint{font-size:.76rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5b6472;background:#fff;padding:3px 10px;border-radius:99px;box-shadow:0 1px 3px rgba(31,35,40,.12)}"
+    },
+    {
+      "name": "Hero Word",
+      "kind": "custom",
+      "refersTo": "display",
+      "description": "Display title; the non-leading side turns soft.",
+      "html": "<p class=\"ds-word\">marketing</p>",
+      "css": ".ds-word{font-size:3.5rem;font-weight:700;letter-spacing:-.04em;line-height:1;color:#1f2328;transition:color .6s cubic-bezier(.16,1,.3,1)} .ds-word:hover{color:#7b8494}"
+    },
+    {
+      "name": "Up-tab",
+      "kind": "nav",
+      "refersTo": "up-tab",
+      "description": "Half-pill tab rising from the footer edge.",
+      "html": "<div class=\"ds-foot\"><a class=\"ds-up\" href=\"#\">^</a></div>",
+      "css": ".ds-foot{position:relative;margin-top:30px;height:60px;background:#fff;box-shadow:0 -1px 0 #e4e7ec} .ds-up{position:absolute;top:-23px;left:50%;translate:-50% 0;width:74px;height:24px;display:grid;place-items:center;background:#fff;color:#5b6472;border-radius:40px 40px 0 0;box-shadow:0 -1px 0 #e4e7ec;text-decoration:none} .ds-up:hover{color:#1f2328}"
+    }
+  ],
+  "narrative": {
+    "northStar": "One Face, Two Readings",
+    "overview": "A white, airy page following the user-pinned references. One oversized head, cropped below the collar, is split by a draggable seam. Left of it the head sits in thin pastel smoke that follows the cursor (marketing); right of it the same natural photo sits plain with syntax-coloured code and floating tech chips (development). Everything below the hero is quiet so the portrait carries the identity.\n\nColour is rationed to two places: the smoke and the brand-coloured chips. Elsewhere the page is ink on white and pale grey. Depth comes from soft layered shadows and hairline rules. The page is static and light: Figtree self-hosted, no libraries, WebGL smoke loaded after load for fine pointers only, CSS blobs as fallback.",
+    "keyCharacteristics": [
+      "White ground, one pale band for projects, hairline dividers.",
+      "Split-face hero: seam position drives the wipe, which half leads, and which copy is interactive.",
+      "Figtree variable for all human text; system mono only for code and stack lines.",
+      "White cards and minis, 12px radius, two-layer soft shadows, lift on hover when linked.",
+      "Spanish copy; nothing invented as proof."
+    ],
+    "rules": [
+      { "name": "The Paint Rule", "body": "Pastels live in the smoke. Elsewhere they are tiny marks only, never fills, buttons or card colours.", "section": "colors" },
+      { "name": "The Borrowed Colour Rule", "body": "Brand colours appear only inside tech chips, as glyph colour on white.", "section": "colors" },
+      { "name": "The Cool Ink Rule", "body": "Text is ink or muted; no pure black text, no warm greys.", "section": "colors" },
+      { "name": "The One Family Rule", "body": "Figtree for everything human-readable; mono only for literal code, stack names and repo names.", "section": "typography" },
+      { "name": "The Soft Shadow Rule", "body": "Shadows are layered, ink-tinted and low-opacity. No hard offset shadows, no coloured glows.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep pastel colour inside the smoke; keep brand colours inside white chips.",
+      "Do use ink and muted for text, line hairlines for structure.",
+      "Do give raised objects the Rest shadow; lift only linked cards and minis.",
+      "Do keep radii to 8px, 12px, 28% (chips) and 99px.",
+      "Do use cubic-bezier(.16,1,.3,1) for transitions and honour prefers-reduced-motion and (pointer: fine) for heavy effects.",
+      "Do keep copy in the half it belongs to and make it inert when that half is mostly hidden.",
+      "Do keep interactive targets at least 44px tall and the 3px blue focus ring visible.",
+      "Do keep first load tiny: self-hosted Figtree, no libraries, smoke loaded after load."
+    ],
+    "donts": [
+      "Don't fill buttons, cards or sections with the pastel accents.",
+      "Don't add dark themes or dark sections.",
+      "Don't use hard offset shadows, coloured glows or heavy borders.",
+      "Don't put controls or labels on the face; the grip sits on the neck.",
+      "Don't introduce a second text family or set prose in mono.",
+      "Don't invent proof (clients, metrics, testimonials) or link unlinked minis."
+    ]
+  }
+}
