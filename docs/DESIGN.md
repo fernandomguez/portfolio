@@ -1,6 +1,6 @@
 ---
 name: Fernando Mínguez Portfolio
-description: One face, two readings. A light, clean, soft-shadow portfolio where a draggable seam splits one portrait between pastel smoke (marketing) and living code (development).
+description: One face, two readings. A light, clean, soft-shadow portfolio where one portrait stands between pastel smoke (marketing) and living code (development).
 colors:
   ink: "#1f2328"
   muted: "#5b6472"
@@ -90,12 +90,6 @@ components:
   tech-chip:
     backgroundColor: "{colors.white}"
     rounded: "{rounded.chip}"
-  seam-grip:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.pill}"
-    width: "64px"
-    height: "44px"
   work-band:
     backgroundColor: "{colors.band}"
   up-tab:
@@ -111,13 +105,13 @@ components:
 
 **Creative North Star: "One Face, Two Readings"**
 
-A white, airy page following the user-pinned references (adhamdannaway.com for the split face and soft cards, aaabadcode.com for the pastel fluid smoke). One oversized head, cropped below the collar, is split by a draggable seam. Left of it the head sits in thin pastel smoke that follows the cursor (marketing); right of it the same natural photo sits plain with syntax-coloured code and floating tech chips (development). Everything below the hero is quiet so the portrait carries the identity.
+A white, airy page following the user-pinned references (adhamdannaway.com for the split face and soft cards, aaabadcode.com for the pastel fluid smoke). One oversized head, cropped below the collar, stands in the centre of a single scene. Left of it thin pastel smoke follows the cursor (marketing); right of it syntax-coloured code lights up under the cursor beside floating tech chips (development). There is no slider: the title on the side under the cursor leads. Everything below the hero is quiet so the portrait carries the identity.
 
 Colour is rationed to two places: the smoke on the marketing side and the brand-coloured chips on the development side. Elsewhere the page is ink on white and pale grey, with the four pastel accents only as tiny marks (selection, footer underline, focus ring). Depth comes from soft layered shadows and hairline rules. The page is static and light (near-instant load): Figtree self-hosted, no libraries, and the WebGL smoke is loaded only after the page `load`, only for fine pointers, with CSS blobs as the fallback.
 
 **Key Characteristics:**
 - White ground, one pale band for projects, hairline dividers.
-- Split-face hero: seam position drives the wipe, which half leads, and which copy is interactive.
+- Single-scene hero: one transparent portrait, the side under the cursor leads, chips float beside the portrait and never touch the body.
 - Figtree variable for all human text; system mono only for code and stack lines.
 - White cards and minis, 12px radius, two-layer soft shadows, lift on hover when linked.
 - Spanish copy; nothing invented as proof.
@@ -127,7 +121,7 @@ Colour is rationed to two places: the smoke on the marketing side and the brand-
 Cool neutral greys on white, with four candy-bright pastels that behave like paint, plus nine borrowed brand colours confined to the chips.
 
 ### Primary
-- **Ink** (`ink`): text, brand, primary pill, the seam line, the code caret. Cool near-black; the pill hover goes to `#000`.
+- **Ink** (`ink`): text, brand, primary pill, the code caret. Cool near-black; the pill hover goes to `#000`.
 
 ### Secondary
 - **Coral** (`coral`): smoke, footer link underline.
@@ -139,12 +133,12 @@ Cool neutral greys on white, with four candy-bright pastels that behave like pai
 - **Brand colours** (`brand-*`): Angular, Spring Boot, Git, Java, TypeScript, GitHub, Docker, Claude, OpenCode. Used only as the glyph fill inside the white tech chips. TypeScript blue, Claude orange and `code-green` also colour the syntax tokens in the hero code.
 
 ### Neutral
-- **Muted** (`muted`): secondary text, nav links, paragraphs, stack lines, the "Arrastra" hint.
+- **Muted** (`muted`): secondary text, nav links, paragraphs, stack lines.
 - **Soft** (`soft`): the dimmed hero title on the non-leading side; base colour of the hero code.
 - **Line** (`line`): hairlines under nav and hero, over footer, above "Más proyectos".
 - **Band** (`band`): projects section ground.
 - **Thumb tile** (`thumb-tile`): tile behind project screenshots.
-- **White** (`white`): page, nav (96% opacity), cards, minis, chips, grip, footer.
+- **White** (`white`): page, nav (96% opacity), cards, minis, chips, footer.
 
 ### Named Rules
 **The Paint Rule.** Pastels live in the smoke. Elsewhere they are tiny marks only, never fills, buttons or card colours.
@@ -163,7 +157,7 @@ Cool neutral greys on white, with four candy-bright pastels that behave like pai
 - **Headline** (700, `clamp(2rem, 4.2vw, 3.2rem)`, 1.05, -0.03em): section heading "Algunos trabajos", centred. Secondary heading "Más proyectos" is 700 at `clamp(1.3rem, 2.2vw, 1.7rem)`. Footer ask is 600 at `clamp(1.15rem, 2.2vw, 1.6rem)`.
 - **Title** (700, 1.3rem, 1.15, -0.02em): project card titles. Brand wordmark 700 at 1.1rem.
 - **Body** (400, 1.0625rem, 1.55): page default; card text 0.95rem; hero paragraphs `clamp(.88rem, 1.15vw, 1.05rem)` capped at 32ch.
-- **Label** (600, 0.92rem): quiet links and card links. The slider hint "Arrastra" is 600 0.76rem uppercase at 0.06em on a white pill, a functional instruction, not a section kicker.
+- **Label** (600, 0.92rem): quiet links and card links.
 - **Mono** (500, 0.76rem, 1.4): stack lines in `muted`; code in the hero at `clamp(.74rem, .95vw, .88rem)`/1.7.
 
 ### Named Rules
@@ -180,7 +174,6 @@ Hybrid: hairlines for structure, soft layered shadows for objects. No dark surfa
 ### Shadow Vocabulary
 - **Rest** (`box-shadow: 0 1px 3px rgba(31,35,40,.12), 0 1px 2px rgba(31,35,40,.06)`, `--shadow`): cards, minis, app-icon thumbnail, hint pill.
 - **Lift** (`box-shadow: 0 12px 30px rgba(31,35,40,.10), 0 2px 6px rgba(31,35,40,.06)`, `--shadow-up`): linked card (4px rise) and linked mini (2px rise) on hover; tech chips at rest.
-- **Grip** (`0 6px 18px rgba(31,35,40,.22), 0 1px 3px rgba(31,35,40,.3)`): the seam grip only.
 - **Hairline** (`0 1px 0 var(--line)` / `0 -1px 0`): nav, hero, footer, up-tab.
 
 ### Named Rules
@@ -188,7 +181,7 @@ Hybrid: hairlines for structure, soft layered shadows for objects. No dark surfa
 
 ## Shapes
 
-Gentle, consistent curves: 8px thumbnail tiles, 12px cards and project minis, 28% (squircle) tech chips, 99px pills (nav CTA, grip, hint). App-icon thumbnail 22px, inner screenshots 6px, focus outline 6px. Up-tab is a half-pill (40px top corners). No borders on objects; separation is shadow or hairline (the only rule line is above "Más proyectos"). Arrows are inline mask-SVG strokes (2px, round caps) in `currentColor`.
+Gentle, consistent curves: 8px thumbnail tiles, 12px cards and project minis, 28% (squircle) tech chips, 99px pills (nav CTA). App-icon thumbnail 22px, inner screenshots 6px, focus outline 6px. Up-tab is a half-pill (40px top corners). No borders on objects; separation is shadow or hairline (the only rule line is above "Más proyectos"). Arrows are inline mask-SVG strokes (2px, round caps) in `currentColor`.
 
 ## Components
 
@@ -199,12 +192,9 @@ Sticky white bar, hairline underline, wordmark left (700), links right in `muted
 - **Project card** (three main): white, 12px, Rest shadow, 10px inset around a 210px thumb tile (8px, `thumb-tile`, screenshot contained, 14px padding; app-icon variant 96px at 22px radius). Order: title, meta (muted), text, mono stack line pinned to the bottom, then arrow-out link or a muted status line. Only linked cards lift.
 - **Project mini** ("Más proyectos"): compact white 12px item, mono name (600, .9rem), muted description, small note. Linked minis lift 2px; unlinked minis are static items with a muted note and no hover.
 
-### Split-face Hero (signature)
-- **Layers:** marketing layer below, development layer above, clipped with `clip-path: inset(0 0 0 var(--split)%)`. Same photo in both, no tint; the portrait is a transparent cutout (alpha PNG exported to AVIF/WebP from `fuente/foto_sinfondo.png`), so no chroma filter is needed.
-- **Seam:** 2px ink line with a 44px-wide handle. A 64x44 white pill grip with chevrons sits on the neck at the bottom, with an "Arrastra" hint above it that fades once used. Never on the face. Keyboard slider: Arrow keys step 5, Home/End jump to 0/100; focus ring on the grip is 3px `blue`.
-- **Entry wipe:** `--split` starts at 100 under JS and wipes from all-marketing to the centre once.
-- **Lead emphasis:** by seam position, the larger side's title scales 1.05 and the other side's title turns `soft`; when development leads, chips scale 1.12 (0.6s expo-out).
-- **Inert copy:** each half's copy lives inside its own layer and becomes `inert` when that half is mostly hidden (marketing under 15, development over 85).
+### Single-scene Hero (signature)
+- **Portrait:** one transparent cutout (alpha PNG exported to AVIF/WebP from `fuente/foto_sinfondo.png`), no tint, no chroma filter. Raised to -0.03 of hero height and side-faded from 721px up (see Layout).
+- **Lead emphasis:** the title on the side under the cursor scales 1.05 and the other side's title turns `soft`; chips on the leading side scale 1.1 (0.6s expo-out).
 - **Marketing half:** thin pastel WebGL fluid smoke with a rainbow hue trail (`smoke.js`), canvas fades in over 1.2s; loaded after `load`, fine pointer only, skipped for reduced motion. Fallback is four CSS radial blobs in the pastels. Copy over it is `ink` with a white text-shadow halo.
 - **Development half:** syntax-coloured mono code lines that type in with staggered 0.6s delays on a 10s loop, a blinking ink caret, and nine white tech chips (28% radius, Lift shadow, brand-coloured glyph) that bob and shift with pointer parallax (per-chip factor `--k`).
 - **Chip placement (both halves):** chips never touch the body. They sit in a loose two-row grid beside the portrait: column 0 starts a fixed gap outside the photo edge and columns open toward the screen edge (`--pitch`, capped at 5.8em). Each chip has its own offset (`--jx`, `--jy`, in em) and size (`--z`, 2.7em-3.3em) so the cluster looks hand-placed, not rigid. Development: Angular, TypeScript, Java, Spring Boot, Docker / Git, GitHub, OpenCode, Claude. Marketing: Analytics, Ads, Odoo / Looker, Power BI, Zoho. From 1101px to 1280px: three columns, up to three rows, offsets at 60%.
@@ -226,7 +216,7 @@ Display-weight centred h2 ("Algunos trabajos") in `ink`, large and tightly track
 - **Do** give raised objects the Rest shadow; lift only linked cards and minis.
 - **Do** keep radii to 8px, 12px, 28% (chips) and 99px.
 - **Do** use `cubic-bezier(.16,1,.3,1)` for transitions and honour `prefers-reduced-motion` and `(pointer: fine)` for heavy effects.
-- **Do** keep copy in the half it belongs to and make it `inert` when that half is mostly hidden.
+- **Do** keep copy in the half it belongs to.
 - **Do** keep interactive targets at least 44px tall and the 3px blue focus ring visible.
 - **Do** keep first load tiny: self-hosted Figtree, no libraries, smoke loaded after `load`.
 
@@ -234,7 +224,7 @@ Display-weight centred h2 ("Algunos trabajos") in `ink`, large and tightly track
 - **Don't** fill buttons, cards or sections with the pastel accents.
 - **Don't** add dark themes or dark sections.
 - **Don't** use hard offset shadows, coloured glows or heavy borders.
-- **Don't** put controls or labels on the face; the grip sits on the neck.
+- **Don't** put controls, labels or chips on the face or the body.
 - **Don't** introduce a second text family or set prose in mono.
 - **Don't** invent proof (clients, metrics, testimonials) or link unlinked minis.
 - **Don't** use the middle dot `·` as a separator in copy, titles or meta (it reads as generated text): use `|` between fields ("Fernando Mínguez | Desarrollador full stack junior"), commas in lists and a short hyphen with spaces in date ranges ("Oct 2022 - Ene 2026").
