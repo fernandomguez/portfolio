@@ -208,9 +208,9 @@ public class PerfilController {
   @GetMapping("/proyectos")
   public List proyectos() {
     return List.of(
-      new ProyectoDto("Trazen",  "Angular · Spring · Capacitor"),
-      new ProyectoDto("SitIn",   "Angular · Spring · PostGIS"),
-      new ProyectoDto("2048",    "JavaScript · PWA · CI")
+      new ProyectoDto("Trazen",  "Angular, Spring, Capacitor"),
+      new ProyectoDto("SitIn",   "Angular, Spring, PostGIS"),
+      new ProyectoDto("2048",    "JavaScript, PWA, CI")
     );
   }
 }
@@ -271,9 +271,9 @@ public class ProfileController {
   @GetMapping("/projects")
   public List projects() {
     return List.of(
-      new ProjectDto("Trazen",  "Angular · Spring · Capacitor"),
-      new ProjectDto("SitIn",   "Angular · Spring · PostGIS"),
-      new ProjectDto("2048",    "JavaScript · PWA · CI")
+      new ProjectDto("Trazen",  "Angular, Spring, Capacitor"),
+      new ProjectDto("SitIn",   "Angular, Spring, PostGIS"),
+      new ProjectDto("2048",    "JavaScript, PWA, CI")
     );
   }
 }
