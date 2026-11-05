@@ -216,7 +216,8 @@ p{text-wrap:pretty}
 @media (max-width:720px){
   .hero{--hh:clamp(600px,calc(100svh - var(--nav-h)),780px);--H:1;--top:.36;grid-template-columns:1fr 1fr}
   .codefog{display:block;left:0}
-  .codefog__base{opacity:.05}
+  .codefog__base{opacity:.09}
+  .codefog__lit{-webkit-mask-image:radial-gradient(circle var(--lr,210px) at var(--mx,-500px) var(--my,-500px),#000 0%,#000 55%,transparent 100%),linear-gradient(180deg,transparent 0,transparent 255px,#000 305px);-webkit-mask-composite:source-in;mask-image:radial-gradient(circle var(--lr,210px) at var(--mx,-500px) var(--my,-500px),#000 0%,#000 55%,transparent 100%),linear-gradient(180deg,transparent 0,transparent 255px,#000 305px);mask-composite:intersect}
   .hero{touch-action:pan-y}
   .pbox{translate:calc(-50% + var(--tx,0) * 7px) calc(var(--ty,0) * 5px)}
   .codefog__code{translate:calc(var(--tx,0) * -12px) calc(var(--ty,0) * -9px)}

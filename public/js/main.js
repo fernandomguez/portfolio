@@ -93,7 +93,7 @@
 
     /* ----- móvil: inclinación (giroscopio) + dedo + deriva suave ----- */
     if (touchFx) {
-      lamp.max = .6;
+      lamp.max = .95;
       const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
       const fx = { nx: 0, ny: 0, tilt: { x: 0, y: 0, at: -1e9, base: null }, touch: { x: 0, y: 0, at: -1e9 }, t0: performance.now(), frame: 0, running: false, tiltOn: false };
       const onTilt = e => {
@@ -130,8 +130,8 @@
         // linterna de código: recorre la zona bajo los textos
         if (fog) {
           lamp.tx = (nx * .5 + .5) * fog.offsetWidth;
-          lamp.ty = (.56 + (ny * .5 + .5) * .34) * fog.offsetHeight;
-          lamp.heat = 118; lamp.on = true; lampMove();
+          lamp.ty = (.4 + (ny * .5 + .5) * .46) * fog.offsetHeight;
+          lamp.heat = 165; lamp.on = true; lampMove();
         }
         // humo: inclinación/deriva mueven el punto por la mitad izquierda (el dedo ya lo empuja en onTouch)
         if (smoke && src !== 1 && fx.frame % 2 === 0) smoke.push(.05 + (nx * .5 + .5) * .5, .12 + (ny * .5 + .5) * .62, 2.2);
