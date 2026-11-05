@@ -91,9 +91,17 @@ p{text-wrap:pretty}
 .chips--mk .chip{left:auto;right:min(calc(50% + var(--pc) * .5 + var(--ox,0px)),calc(100% - 4.4em));translate:calc(var(--lx,0) * var(--k) * 1px) calc(var(--ly,0) * var(--k) * 1px)}
 /* iconos en rejilla ordenada, siempre fuera de la foto (escritorio): columna 0 pegada al borde de la foto, dos filas */
 @media (min-width:721px){
-  .hero{--bw:calc(var(--hh) * var(--H) * .784);--gap:clamp(14px,2vw,34px)}
-  .chip{--s:3em!important;--pitch:min(4.2em,calc((50% - var(--bw) / 2 - var(--gap) - 3em - 8px) / 4));left:calc(50% + var(--bw) / 2 + var(--gap) + var(--cx) * var(--pitch));top:calc(70% + var(--ry) * 12%)!important}
-  .chips--mk .chip{left:auto;right:calc(50% + var(--bw) / 2 + var(--gap) + var(--cx) * var(--pitch))}
+  .hero{--bw:calc(var(--hh) * var(--H) * .784);--gap:clamp(24px,3.4vw,64px)}
+  .chip{--s:var(--z,3em)!important;--pitch:min(5.8em,calc((50% - var(--bw) / 2 - var(--gap) - 5em - 12px) / 4));margin-left:calc(var(--jx,0) * 1em);margin-top:calc(var(--jy,0) * 1em);left:calc(50% + var(--bw) / 2 + var(--gap) + var(--cx) * var(--pitch));top:calc(70% + var(--ry) * 12%)!important}
+  .chips--mk .chip{left:auto;margin-left:0;margin-right:calc(var(--jx,0) * 1em);right:calc(50% + var(--bw) / 2 + var(--gap) + var(--cx) * var(--pitch))}
+  /* orden desordenado: cada icono con su propio desvío y tamaño */
+  .chips:not(.chips--mk) .chip:nth-child(1){--jx:.3;--jy:-.9;--z:3.1em}.chips:not(.chips--mk) .chip:nth-child(2){--jx:-.6;--jy:.8;--z:2.8em}
+  .chips:not(.chips--mk) .chip:nth-child(3){--jx:.5;--jy:-.3;--z:3.3em}.chips:not(.chips--mk) .chip:nth-child(4){--jx:-.4;--jy:1;--z:2.9em}
+  .chips:not(.chips--mk) .chip:nth-child(7){--jx:.7;--jy:-.7;--z:3.1em}.chips:not(.chips--mk) .chip:nth-child(5){--jx:-.5;--jy:.5;--z:2.7em}
+  .chips:not(.chips--mk) .chip:nth-child(6){--jx:.6;--jy:1.1;--z:3.2em}.chips:not(.chips--mk) .chip:nth-child(8){--jx:-.7;--jy:-.4;--z:3em}
+  .chips:not(.chips--mk) .chip:nth-child(9){--jx:.2;--jy:.9;--z:2.8em}
+  .chips--mk .chip:nth-child(1){--jx:-.4;--jy:.7;--z:3.2em}.chips--mk .chip:nth-child(2){--jx:.6;--jy:-.8;--z:2.8em}.chips--mk .chip:nth-child(5){--jx:-.5;--jy:.4;--z:3.1em}
+  .chips--mk .chip:nth-child(3){--jx:.7;--jy:-.5;--z:2.9em}.chips--mk .chip:nth-child(4){--jx:-.6;--jy:.9;--z:3.3em}.chips--mk .chip:nth-child(6){--jx:.4;--jy:-.7;--z:2.8em}
   /* desarrollo: Angular+TypeScript, Java+Spring Boot+Docker / Git+GitHub, OpenCode+Claude */
   .chips:not(.chips--mk) .chip:nth-child(1){--cx:0;--ry:0}.chips:not(.chips--mk) .chip:nth-child(2){--cx:1;--ry:0}
   .chips:not(.chips--mk) .chip:nth-child(3){--cx:2;--ry:0}.chips:not(.chips--mk) .chip:nth-child(4){--cx:3;--ry:0}
@@ -106,14 +114,15 @@ p{text-wrap:pretty}
 }
 /* anchos medios: tres columnas y hasta tres filas; por debajo de 1000px la foto ocupa casi todo el ancho y los iconos se ocultan */
 @media (min-width:721px) and (max-width:1280px){
-  .chip{--pitch:min(4.2em,calc((50% - var(--bw) / 2 - var(--gap) - 3em - 8px) / 2));top:calc(60% + var(--ry) * 10%)!important}
+  .chip{--pitch:min(5em,calc((50% - var(--bw) / 2 - var(--gap) - 5em - 12px) / 2));top:calc(60% + var(--ry) * 10%)!important;margin-left:calc(var(--jx,0) * .6em);margin-top:calc(var(--jy,0) * .6em)}
+  .chips--mk .chip{margin-left:0;margin-right:calc(var(--jx,0) * .6em)}
   .chips:not(.chips--mk) .chip:nth-child(1){--cx:0;--ry:0}.chips:not(.chips--mk) .chip:nth-child(2){--cx:1;--ry:0}.chips:not(.chips--mk) .chip:nth-child(3){--cx:2;--ry:0}
   .chips:not(.chips--mk) .chip:nth-child(4){--cx:0;--ry:1}.chips:not(.chips--mk) .chip:nth-child(5){--cx:1;--ry:1}.chips:not(.chips--mk) .chip:nth-child(6){--cx:2;--ry:1}
   .chips:not(.chips--mk) .chip:nth-child(7){--cx:0;--ry:2}.chips:not(.chips--mk) .chip:nth-child(8){--cx:1;--ry:2}.chips:not(.chips--mk) .chip:nth-child(9){--cx:2;--ry:2}
   .chips--mk .chip:nth-child(1){--cx:0;--ry:0}.chips--mk .chip:nth-child(2){--cx:1;--ry:0}.chips--mk .chip:nth-child(3){--cx:2;--ry:0}
   .chips--mk .chip:nth-child(4){--cx:0;--ry:1}.chips--mk .chip:nth-child(5){--cx:1;--ry:1}.chips--mk .chip:nth-child(6){--cx:2;--ry:1}
 }
-@media (min-width:721px) and (max-width:1000px){.chips{display:none}}
+@media (min-width:721px) and (max-width:1100px){.chips{display:none}}
 .hero[data-lead=mk] .chips--mk .chip__in{scale:1.1}
 @keyframes bob{50%{translate:0 -8px}}
 .hero[data-lead=dev] .chips:not(.chips--mk) .chip__in{scale:1.1}
