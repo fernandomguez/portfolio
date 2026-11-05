@@ -208,10 +208,18 @@ p{text-wrap:pretty}
 }
 @media (max-width:720px){
   .hero{--hh:clamp(600px,calc(100svh - var(--nav-h)),780px);--H:1;--top:.36;grid-template-columns:1fr 1fr}
-  .chips--mk{display:none}
-  .chips:not(.chips--mk) .chip:nth-child(n+5){display:none}
+  .codefog{display:block;left:0}
+  .codefog__base{opacity:.05}
+  .codefog__lit{display:none}
+  /* desarrollo (derecha): Angular, Java, Spring Boot, Docker */
+  .chips:not(.chips--mk) .chip:nth-child(2),.chips:not(.chips--mk) .chip:nth-child(n+5):not(:nth-child(7)){display:none}
+  .chips:not(.chips--mk) .chip:nth-child(7),.chips--mk .chip:nth-child(5),.chips--mk .chip:nth-child(6){display:block}
   .chips:not(.chips--mk) .chip{left:auto!important;right:10px;--s:2.6em}
-  .chips:not(.chips--mk) .chip:nth-child(1){top:52%!important}.chips:not(.chips--mk) .chip:nth-child(2){top:62%!important}.chips:not(.chips--mk) .chip:nth-child(3){top:72%!important}.chips:not(.chips--mk) .chip:nth-child(4){top:82%!important}
+  .chips:not(.chips--mk) .chip:nth-child(1){top:52%!important}.chips:not(.chips--mk) .chip:nth-child(3){top:62%!important}.chips:not(.chips--mk) .chip:nth-child(4){top:72%!important}.chips:not(.chips--mk) .chip:nth-child(7){top:82%!important}
+  /* marketing (izquierda): Analytics, Odoo, Google Ads, Mailchimp */
+  .chips--mk .chip:nth-child(3),.chips--mk .chip:nth-child(4){display:none}
+  .chips--mk .chip{right:auto!important;left:10px!important;--s:2.6em}
+  .chips--mk .chip:nth-child(1){top:52%!important}.chips--mk .chip:nth-child(5){top:62%!important}.chips--mk .chip:nth-child(2){top:72%!important}.chips--mk .chip:nth-child(6){top:82%!important}
   .copy{padding-top:22px}
   .copy--mk{grid-column:1;padding-right:8px}
   .copy--dev{grid-column:2;padding-left:8px}
