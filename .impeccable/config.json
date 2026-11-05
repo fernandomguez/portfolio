@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "cv/cv_v5.html"
+        ],
+        "createdAt": "2026-11-05T20:57:13.237Z",
+        "reason": "Agent triage: finding is the marker-style highlight (gradient under 'prácticas de desarrollo en marzo de 2027') and the thin rule under the header, not a padded container; intentional, not confirmed by user"
+      }
+    ]
+  }
+}
