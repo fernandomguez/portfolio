@@ -1,6 +1,8 @@
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(pointer: fine)').matches;
+  const touchFx = !fine && !reduced;        // móvil/tablet: la inclinación, el dedo o un movimiento suave dirigen el efecto
+  let smoke = null;
   const $ = (s, r = document) => r.querySelector(s);
 
   /* ---------- menu ---------- */
@@ -30,7 +32,7 @@
   /* ---------- hero: half under the pointer (mouse only) + código linterna ---------- */
   const hero = $('.hero');
   const fog = $('.codefog'), lit = $('.codefog__lit');
-  if (hero && fine) {
+  if (hero && (fine || touchFx)) {
     let tick = 0, ex = 0, ey = 0;
     const lamp = { x: -600, y: -600, r: 210, tx: -600, ty: -600, heat: 210, vis: 0, on: false, px: null, py: null, rect: null };
     let lampRAF = 0;
@@ -44,7 +46,7 @@
       fog.style.setProperty('--mx', Math.round(lamp.x) + 'px');
       fog.style.setProperty('--my', Math.round(lamp.y) + 'px');
       fog.style.setProperty('--lr', Math.round(lamp.r) + 'px');
-      lit.style.opacity = (lamp.vis * .78).toFixed(3);
+      lit.style.opacity = (lamp.vis * (lamp.max || .78)).toFixed(3);
       if (lamp.vis > .02) lampRAF = requestAnimationFrame(step);
     };
     const lampMove = () => {
@@ -56,6 +58,7 @@
       lamp.on = false;
       lampMove();
     };
+    if (fine) {
     hero.addEventListener('pointermove', e => {
       ex = e.clientX; ey = e.clientY;
       if (tick) return;
@@ -86,12 +89,81 @@
     });
     hero.addEventListener('pointerleave', clear);
     window.addEventListener('resize', () => { lamp.rect = null; }, { passive: true });
+    }
+
+    /* ----- móvil: inclinación (giroscopio) + dedo + deriva suave ----- */
+    if (touchFx) {
+      lamp.max = .6;
+      const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+      const fx = { nx: 0, ny: 0, tilt: { x: 0, y: 0, at: -1e9, base: null }, touch: { x: 0, y: 0, at: -1e9 }, t0: performance.now(), frame: 0, running: false, tiltOn: false };
+      const onTilt = e => {
+        if (e.gamma == null || e.beta == null) return;
+        const t = fx.tilt;
+        if (!t.base) t.base = { g: e.gamma, b: e.beta };
+        t.base.g += (e.gamma - t.base.g) * .004; t.base.b += (e.beta - t.base.b) * .004;   // se recentra poco a poco
+        t.x = clamp((e.gamma - t.base.g) / 22, -1, 1); t.y = clamp((e.beta - t.base.b) / 22, -1, 1);
+        t.at = performance.now();
+        const b = $('.tilt-btn'); if (b && !b.hidden) b.hidden = true;   // ya llegan eventos: no hace falta el botón
+      };
+      const listenTilt = () => { if (!fx.tiltOn) { fx.tiltOn = true; addEventListener('deviceorientation', onTilt, { passive: true }); } };
+      const onTouch = e => {
+        if (e.pointerType !== 'touch') return;
+        const r = hero.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        fx.touch.x = clamp(x * 2 - 1, -1, 1); fx.touch.y = clamp(y * 2 - 1, -1, 1); fx.touch.at = performance.now();
+        if (smoke) smoke.push(x, y, 1.4);
+      };
+      hero.addEventListener('pointerdown', onTouch, { passive: true });
+      hero.addEventListener('pointermove', onTouch, { passive: true });
+
+      const loop = now => {
+        if (!fx.running) return;
+        fx.frame++;
+        let tx, ty, src = 0;
+        if (now - fx.touch.at < 1600) { tx = fx.touch.x; ty = fx.touch.y; src = 1; }
+        else if (now - fx.tilt.at < 900) { tx = fx.tilt.x; ty = fx.tilt.y; src = 2; }
+        else { const t = (now - fx.t0) / 1000; tx = Math.sin(t * .5) * .85; ty = Math.cos(t * .37) * .6; src = 3; }
+        fx.nx += (tx - fx.nx) * .08; fx.ny += (ty - fx.ny) * .08;
+        const { nx, ny } = fx;
+        ['--px', '--lx', '--tx'].forEach(v => hero.style.setProperty(v, nx.toFixed(3)));
+        ['--py', '--ly', '--ty'].forEach(v => hero.style.setProperty(v, ny.toFixed(3)));
+        // linterna de código: recorre la zona bajo los textos
+        if (fog) {
+          lamp.tx = (nx * .5 + .5) * fog.offsetWidth;
+          lamp.ty = (.56 + (ny * .5 + .5) * .34) * fog.offsetHeight;
+          lamp.heat = 118; lamp.on = true; lampMove();
+        }
+        // humo: inclinación/deriva mueven el punto por la mitad izquierda (el dedo ya lo empuja en onTouch)
+        if (smoke && src !== 1 && fx.frame % 2 === 0) smoke.push(.05 + (nx * .5 + .5) * .5, .12 + (ny * .5 + .5) * .62, 2.2);
+        requestAnimationFrame(loop);
+      };
+      const run = on => { if (on && !fx.running && !document.hidden) { fx.running = true; requestAnimationFrame(loop); } else if (!on) fx.running = false; };
+      let vis = true;
+      new IntersectionObserver(([en]) => { vis = en.isIntersecting; run(vis); }).observe(hero);
+      document.addEventListener('visibilitychange', () => run(vis && !document.hidden));
+
+      // sensor: en Android llega solo; en iPhone hace falta un permiso que pide el botón
+      const btn = $('.tilt-btn');
+      const needsPerm = typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function';
+      if (!needsPerm) listenTilt();
+      else {
+        listenTilt();   // si Safari ya recuerda el permiso, los eventos llegan sin botón
+        setTimeout(() => { if (fx.tilt.at < 0 && btn) btn.hidden = false; }, 1500);
+        if (btn) btn.addEventListener('click', async () => {
+          try {
+            const r = await DeviceOrientationEvent.requestPermission();
+            if (r === 'granted') { fx.tilt.base = null; btn.hidden = true; }
+          } catch { btn.hidden = true; }
+        });
+      }
+    }
   }
 
   /* ---------- smoke (mouse + WebGL2 + no reduced motion; loaded after the page is ready) ---------- */
   const canvas = $('.smoke');
-  if (hero && canvas && fine && !reduced) {
-    const go = () => import('./smoke.js').then(m => { if (m.default(canvas, hero)) canvas.classList.add('on'); }).catch(() => {});
+  const lowPower = !!(navigator.connection && navigator.connection.saveData) || (navigator.deviceMemory && navigator.deviceMemory <= 2);
+  if (hero && canvas && !reduced && (fine || (touchFx && !lowPower))) {
+    const go = () => import('./smoke.js').then(m => { smoke = m.default(canvas, hero, { low: !fine }); if (smoke) canvas.classList.add('on'); }).catch(() => {});
     const later = () => ('requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 2500 }) : setTimeout(go, 800));
     document.readyState === 'complete' ? later() : addEventListener('load', later, { once: true });
   }

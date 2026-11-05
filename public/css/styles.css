@@ -106,6 +106,7 @@ p{text-wrap:pretty}
 .jobs__when{font-weight:500;color:var(--muted)}
 .jobs h3{font-size:clamp(1.3rem,2.2vw,1.7rem)}
 .jobs__role{margin-top:4px;color:var(--muted);font-weight:500}
+.jobs__role--next{margin-top:24px}
 .jobs ul{margin:12px 0 0;padding-left:1.1em;max-width:62ch}
 .jobs ul li{margin-bottom:6px;padding-left:2px}
 .jobs ul li::marker{color:var(--coral)}
@@ -152,6 +153,7 @@ p{text-wrap:pretty}
 .chip-btn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:99px;border:1px solid var(--line);background:#fff;font-size:.88rem;font-weight:600;text-decoration:none;transition:background .2s,border-color .2s}
 .chip-btn:hover{background:var(--ink);border-color:var(--ink);color:#fff}
 .chip-btn svg{width:15px;height:15px}
+.jobs__cta{margin:14px 0 0}
 .card__status{font-size:.88rem;font-weight:500;color:var(--muted);margin-top:8px}
 
 .more-projects{margin-top:clamp(40px,6vw,72px);padding-top:clamp(24px,3vw,36px);border-top:1px solid var(--line)}
@@ -193,6 +195,11 @@ p{text-wrap:pretty}
 .up{position:absolute;top:-23px;left:50%;translate:-50% 0;width:74px;height:24px;display:grid;place-items:center;background:#fff;color:var(--muted);border-radius:40px 40px 0 0;box-shadow:0 -1px 0 var(--line)}
 .up:hover{color:var(--ink)}
 
+/* botón del permiso del sensor (solo iPhone) */
+.tilt-btn{position:absolute;left:50%;bottom:14px;translate:-50% 0;z-index:6;align-items:center;gap:6px;min-height:36px;padding:0 14px;border:1px solid var(--line);border-radius:99px;background:rgba(255,255,255,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-family:inherit;font-weight:600;font-size:.8rem;white-space:nowrap;color:var(--ink);box-shadow:var(--shadow);cursor:pointer}
+.tilt-btn:not([hidden]){display:inline-flex}
+.tilt-btn[hidden]{display:none}
+
 /* narrower screens */
 @media (max-width:1040px){.cv__cols{grid-template-columns:1fr}}
 @media (max-width:1180px){.codefog{display:none}.chips:not(.chips--mk) .chip:nth-child(n+7){display:none}.chips--mk .chip:nth-child(n+5){display:none}}
@@ -210,7 +217,9 @@ p{text-wrap:pretty}
   .hero{--hh:clamp(600px,calc(100svh - var(--nav-h)),780px);--H:1;--top:.36;grid-template-columns:1fr 1fr}
   .codefog{display:block;left:0}
   .codefog__base{opacity:.05}
-  .codefog__lit{display:none}
+  .hero{touch-action:pan-y}
+  .pbox{translate:calc(-50% + var(--tx,0) * 7px) calc(var(--ty,0) * 5px)}
+  .codefog__code{translate:calc(var(--tx,0) * -12px) calc(var(--ty,0) * -9px)}
   /* desarrollo (derecha): Angular, Java, Spring Boot, Docker */
   .chips:not(.chips--mk) .chip:nth-child(2),.chips:not(.chips--mk) .chip:nth-child(n+5):not(:nth-child(7)){display:none}
   .chips:not(.chips--mk) .chip:nth-child(7),.chips--mk .chip:nth-child(5),.chips--mk .chip:nth-child(6){display:block}

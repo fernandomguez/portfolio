@@ -1,6 +1,7 @@
 // Pastel fluid smoke that follows the pointer. WebGL2, no dependencies.
 // Returns null when the browser cannot render it, so the CSS fallback stays.
-export default function start(canvas, host) {
+export default function start(canvas, host, opts = {}) {
+  const low = !!opts.low;
   const gl = canvas.getContext('webgl2', { alpha: false, antialias: false, depth: false, stencil: false });
   if (!gl || !gl.getExtension('EXT_color_buffer_float')) return null;
 
@@ -45,7 +46,7 @@ void main(){vUv=p*.5+.5;vL=vUv-vec2(t.x,0);vR=vUv+vec2(t.x,0);vT=vUv+vec2(0,t.y)
 
   const asp = host.clientWidth / Math.max(1, host.clientHeight);
   const res = n => asp > 1 ? [Math.round(n * asp), n] : [n, Math.round(n / asp)];
-  const [sw, sh2] = res(128), [dw, dh] = res(512);
+  const [sw, sh2] = res(low ? 96 : 128), [dw, dh] = res(low ? 384 : 512);
   canvas.width = dw; canvas.height = dh;
 
   const fbo = (w, h) => {
@@ -89,22 +90,25 @@ void main(){vUv=p*.5+.5;vL=vUv-vec2(t.x,0);vR=vUv+vec2(t.x,0);vT=vUv+vec2(0,t.y)
   const burst = () => { const n = 5 + (Math.random() * 2 | 0); for (let i = 0; i < n; i++) stroke(); };
 
   let last = null, travel = 0, moved = 0, on = false, prev = 0, nextAuto = 0;
-  host.addEventListener('pointermove', e => {
-    if (e.pointerType === 'touch') return;
-    const r = host.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width, y = 1 - (e.clientY - r.top) / r.height;
+  const move = (x, y, w, h, gain = 1) => {
     if (x > .62) { last = null; return; }
     if (last) {
       const dx = x - last[0], dy = y - last[1];
-      travel += Math.abs(dx * r.width) + Math.abs(dy * r.height);
-      if (dx || dy) splat(x, y, dx * 7000, dy * 7000, hue(travel / 900), .28);
+      travel += Math.abs(dx * w) + Math.abs(dy * h);
+      if (dx || dy) splat(x, y, dx * 7000 * gain, dy * 7000 * gain, hue(travel / 900), .28);
     }
     last = [x, y]; moved = performance.now();
+  };
+  host.addEventListener('pointermove', e => {
+    if (e.pointerType === 'touch') return;
+    const r = host.getBoundingClientRect();
+    move((e.clientX - r.left) / r.width, 1 - (e.clientY - r.top) / r.height, r.width, r.height);
   });
   host.addEventListener('pointerleave', () => { last = null; });
 
   const frame = now => {
     if (!on) return;
+    if (low && now - prev < 30) { requestAnimationFrame(frame); return; }
     const dt = Math.min((now - prev) / 1000, .033) || .016; prev = now;
     if (now - moved > 3500 && now > nextAuto) { stroke(); nextAuto = now + 3200; }
     run(P.curl, curl, { v: vel.r });
@@ -126,5 +130,7 @@ void main(){vUv=p*.5+.5;vL=vUv-vec2(t.x,0);vR=vUv+vec2(t.x,0);vT=vUv+vec2(0,t.y)
   new IntersectionObserver(([en]) => { visible.v = en.isIntersecting; visible.v && !document.hidden ? play() : pause(); }).observe(host);
   document.addEventListener('visibilitychange', () => { document.hidden ? pause() : visible.v && play(); });
   play();
-  return { play, pause };
+  // push(x, y): posición normalizada 0..1 dentro del hero (y hacia abajo); lo usa el modo táctil/inclinación
+  const push = (x, y, gain = 1) => move(x, 1 - y, host.clientWidth, host.clientHeight, gain);
+  return { play, pause, push };
 }
