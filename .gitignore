@@ -11,3 +11,7 @@ fuente/
 .DS_Store
 Thumbs.db
 .impeccable/hook.cache.json
+node_modules/
+package-lock.json
+# CV (no publicado de momento)
+cv/

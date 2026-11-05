@@ -27,15 +27,34 @@
     map.forEach((_, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
   }
 
-  /* ---------- hero: which half is the pointer on (mouse only) ---------- */
+  /* ---------- hero: half under the pointer (mouse only) + código linterna ---------- */
   const hero = $('.hero');
-  const codebg = $('.codebg');
+  const fog = $('.codefog'), lit = $('.codefog__lit');
   if (hero && fine) {
     let tick = 0, ex = 0, ey = 0;
+    const lamp = { x: -600, y: -600, r: 210, tx: -600, ty: -600, heat: 210, vis: 0, on: false, px: null, py: null, rect: null };
+    let lampRAF = 0;
+    const step = () => {
+      lampRAF = 0;
+      lamp.heat += (200 - lamp.heat) * .035;            // se enfría al dejar de mover
+      lamp.x += (lamp.tx - lamp.x) * .16;
+      lamp.y += (lamp.ty - lamp.y) * .16;
+      lamp.r += (lamp.heat - lamp.r) * .09;
+      lamp.vis += ((lamp.on ? 1 : 0) - lamp.vis) * .18;
+      fog.style.setProperty('--mx', Math.round(lamp.x) + 'px');
+      fog.style.setProperty('--my', Math.round(lamp.y) + 'px');
+      fog.style.setProperty('--lr', Math.round(lamp.r) + 'px');
+      lit.style.opacity = (lamp.vis * .78).toFixed(3);
+      if (lamp.vis > .02) lampRAF = requestAnimationFrame(step);
+    };
+    const lampMove = () => {
+      if (!lampRAF) lampRAF = requestAnimationFrame(step);
+    };
     const clear = () => {
       hero.dataset.lead = '';
       ['--px', '--py', '--lx', '--ly'].forEach(v => hero.style.setProperty(v, 0));
-      if (codebg) codebg.classList.remove('hot');
+      lamp.on = false;
+      lampMove();
     };
     hero.addEventListener('pointermove', e => {
       ex = e.clientX; ey = e.clientY;
@@ -49,10 +68,24 @@
         // each half's floating icons only follow the pointer while it is on that half
         hero.style.setProperty('--lx', left ? nx : 0); hero.style.setProperty('--ly', left ? ny : 0);
         hero.style.setProperty('--px', left ? 0 : nx); hero.style.setProperty('--py', left ? 0 : ny);
-        if (codebg) codebg.classList.toggle('hot', !left);
+        if (!left && fog && !reduced) {
+          if (!lamp.rect || lamp.rect.width !== fog.offsetWidth) lamp.rect = fog.getBoundingClientRect();
+          lamp.tx = ex - lamp.rect.left; lamp.ty = ey - lamp.rect.top;
+          if (lamp.px !== null) {
+            // velocidad del puntero → radio de la linterna (crece al mover rápido, se enfría al parar)
+            const spd = Math.hypot(ex - lamp.px, ey - lamp.py);
+            lamp.heat = Math.min(300, 200 + spd * 1.4);
+          }
+          lamp.px = ex; lamp.py = ey;
+          lamp.on = true;
+        } else {
+          lamp.on = false;
+        }
+        lampMove();
       });
     });
     hero.addEventListener('pointerleave', clear);
+    window.addEventListener('resize', () => { lamp.rect = null; }, { passive: true });
   }
 
   /* ---------- smoke (mouse + WebGL2 + no reduced motion; loaded after the page is ready) ---------- */
@@ -63,47 +96,80 @@
     document.readyState === 'complete' ? later() : addEventListener('load', later, { once: true });
   }
 
-  /* ---------- background code that types itself ---------- */
-  const code = $('.codebg__code');
-  if (code) {
-    const SN = [
-      [['c', '// fernando.ts\n'], ['k', 'const'], ['', ' fernando = {\n  '], ['p', 'rol'], ['', ': '], ['s', '"Full Stack junior"'], ['', ',\n  '],
-        ['p', 'stack'], ['', ': ['], ['s', '"Java"'], ['', ', '], ['s', '"Spring"'], ['', ', '], ['s', '"Angular"'], ['', '],\n  '],
-        ['p', 'antes'], ['', ': '], ['s', '"marketing y negocio"'], ['', ',\n  '], ['p', 'busco'], ['', ': '], ['s', '"prácticas 2027"'], ['', ',\n};']],
-      [['c', '// PerfilController.java\n'], ['f', '@GetMapping'], ['', '('], ['s', '"/perfil"'], ['', ')\n'], ['k', 'public'], ['', ' Perfil '], ['f', 'perfil'], ['', '() {\n  '],
-        ['k', 'return new'], ['', ' Perfil(\n    '], ['s', '"Fernando"'], ['', ',\n    List.'], ['f', 'of'], ['', '('], ['s', '"Java"'], ['', ', '], ['s', '"Angular"'], ['', ')\n  );\n}']]
-    ];
-    const caret = document.createElement('b'); caret.className = 'caret';
-    if (reduced) {
-      SN[0].forEach(([c, x]) => { const sp = document.createElement('span'); if (c) sp.className = c; sp.textContent = x; code.appendChild(sp); });
-    } else {
-      let visible = true;
-      if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(hero);
-      const sleep = ms => new Promise(r => setTimeout(r, ms));
-      const wait = async () => { while (!visible || document.hidden) await sleep(300); };
-      const type = async toks => {
-        code.textContent = ''; code.appendChild(caret);
-        for (const [c, x] of toks) {
-          const sp = document.createElement('span'); if (c) sp.className = c; code.insertBefore(sp, caret);
-          for (const ch of x) {
-            await wait();
-            sp.textContent += ch;
-            await sleep(ch === '\n' ? 280 : ch === ' ' ? 35 : 42 + Math.random() * 60);
-          }
-        }
-      };
-      const erase = async () => {
-        const spans = [...code.querySelectorAll('span')];
-        while (spans.length) {
-          await wait();
-          const sp = spans[spans.length - 1];
-          if (!sp.textContent) { sp.remove(); spans.pop(); continue; }
-          sp.textContent = sp.textContent.slice(0, -4);
-          await sleep(12);
-        }
-      };
-      (async () => { for (let i = 0; ; i++) { await type(SN[i % SN.length]); await sleep(3000); await erase(); await sleep(400); } })();
-    }
+  /* ---------- fondo denso de código (la linterna lo revela) ---------- */
+  const fogEl = $('.codefog');
+  if (fogEl) {
+    const CODE = `// fernando.ts — el perfil como interfaz
+import { Spring, Angular, Postgres, Ionic } from "stack/core";
+
+export interface Candidato {
+  rol: string;
+  stack: string[];
+  ventas: string;
+  proyectos: string[];
+  disponible: string;
+}
+
+export const fernando: Candidato = {
+  rol: "Full Stack junior",
+  stack: ["Java", "Spring Boot", "Angular", "TypeScript"],
+  extra: ["Ionic", "Capacitor", "PostgreSQL", "Docker"],
+  antes: "9 años en marketing y negocio",
+  busco: "prácticas de desarrollo en 2027",
+};
+
+// PerfilController.java — la misma información, por API
+@RestController
+@RequestMapping("/perfil")
+@Validated
+public class PerfilController {
+
+  private final CandidatosRepository repo;
+
+  @GetMapping(value = "/fernando", produces = "application/json")
+  public ResponseEntity perfil() {
+    var c = repo.findByNombre("Fernando Mínguez");
+    c.setDisponibilidad(LocalDate.of(2027, 2, 1));
+    return ResponseEntity.ok(c);         // 200, como siempre
+  }
+
+  @GetMapping("/proyectos")
+  public List proyectos() {
+    return List.of(
+      new ProyectoDto("Trazen",  "Angular · Spring · Capacitor"),
+      new ProyectoDto("SitIn",   "Angular · Spring · PostGIS"),
+      new ProyectoDto("2048",    "JavaScript · PWA · CI")
+    );
+  }
+}
+
+// InMemoryCandidatos.java — la base de datos de prueba
+public class InMemoryCandidatos implements CandidatosRepository {
+
+  private final Map datos = new HashMap();
+
+  @Override
+  public Optional findByNombre(String nombre) {
+    var c = new Candidato("Fernando", "Full Stack junior");
+    return Optional.of(datos.putIfAbsent(nombre, c));
+  }
+}
+
+// PRUEBAS — el caché de tormentas que ya pasó
+@Test
+void elPerfilResponde200() {
+  given().get("/perfil/fernando")
+    .then().statusCode(200)
+         .body("rol", equalTo("Full Stack junior"));
+}`;
+    // resaltado con la misma paleta del hero: comentarios, strings, palabras clave, anotaciones y llamadas
+    const reg = /(\/\/[^\n]*)|("(?:[^"\\\n]|\\.)*")|(@\w+)|\b(?:export|interface|const|import|from|public|class|private|final|return|new|var|implements|void|given|get|then)\b|(\b[A-Za-z_]\w*\b(?=\s*:))|(\b[A-Za-z_]\w*(?=\())/g;
+    const html = CODE.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(reg, (m, c, s, ann, kw, prop, fn) => {
+        const clase = c ? 'c' : s ? 's' : ann ? 'f' : kw ? 'k' : prop ? 'p' : 'f';
+        return `<span class="${clase}">${m}</span>`;
+      });
+    fogEl.querySelectorAll('.codefog__code').forEach(el => { el.innerHTML = html; });
   }
 
   /* ---------- statement: words light up while scrolling ---------- */
