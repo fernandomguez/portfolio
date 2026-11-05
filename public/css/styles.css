@@ -185,7 +185,7 @@ p{text-wrap:pretty}
 .all{display:inline-flex;align-items:center;min-height:44px;margin-top:12px;font-weight:600;font-size:.92rem;text-underline-offset:5px}
 
 /* contact */
-.contact{padding:clamp(72px,11vw,150px) 0;background:#fff;text-align:center}
+.contact{padding:clamp(72px,11vw,150px) 0;background:var(--band);text-align:center}
 .contact__actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:32px}
 .btn{display:inline-flex;align-items:center;gap:8px;min-height:50px;padding:0 24px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-weight:600;text-decoration:none;box-shadow:var(--shadow);transition:background .2s,color .2s,translate .3s var(--ease)}
 .btn:hover{translate:0 -2px}
