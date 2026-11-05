@@ -163,6 +163,7 @@ p{text-wrap:pretty}
 .soft{color:var(--muted);max-width:52ch}
 .stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
 .stack__g{padding:18px;border:1px solid var(--line);border-radius:12px}
+.stack__col{display:grid;gap:16px;align-content:start}
 .stack__g h4{font-size:1rem;letter-spacing:-.01em;margin-bottom:12px}
 .pills{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .pills li{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:99px;background:#f1f3f6;font-size:.86rem;font-weight:500}
