@@ -200,7 +200,7 @@ Sticky white bar, hairline underline, wordmark left (700), links right in `muted
 - **Project mini** ("Más proyectos"): compact white 12px item, mono name (600, .9rem), muted description, small note. Linked minis lift 2px; unlinked minis are static items with a muted note and no hover.
 
 ### Split-face Hero (signature)
-- **Layers:** marketing layer below, development layer above, clipped with `clip-path: inset(0 0 0 var(--split)%)`. Same natural photo in both, no tint; an inline SVG `#cut` alpha filter cuts the head out of its backdrop.
+- **Layers:** marketing layer below, development layer above, clipped with `clip-path: inset(0 0 0 var(--split)%)`. Same photo in both, no tint; the portrait is a transparent cutout (alpha PNG exported to AVIF/WebP from `fuente/foto_sinfondo.png`), so no chroma filter is needed.
 - **Seam:** 2px ink line with a 44px-wide handle. A 64x44 white pill grip with chevrons sits on the neck at the bottom, with an "Arrastra" hint above it that fades once used. Never on the face. Keyboard slider: Arrow keys step 5, Home/End jump to 0/100; focus ring on the grip is 3px `blue`.
 - **Entry wipe:** `--split` starts at 100 under JS and wipes from all-marketing to the centre once.
 - **Lead emphasis:** by seam position, the larger side's title scales 1.05 and the other side's title turns `soft`; when development leads, chips scale 1.12 (0.6s expo-out).
