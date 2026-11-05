@@ -11,7 +11,7 @@
     const set = open => {
       menu.classList.toggle('open', open);
       toggle.setAttribute('aria-expanded', open);
-      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      toggle.setAttribute('aria-label', document.documentElement.lang === 'en' ? (open ? 'Close menu' : 'Open menu') : (open ? 'Cerrar menú' : 'Abrir menú'));
       toggle.querySelector('use').setAttribute('href', open ? '#i-x' : '#i-menu');
     };
     toggle.addEventListener('click', () => set(!menu.classList.contains('open')));
@@ -171,7 +171,7 @@
   /* ---------- fondo denso de código (la linterna lo revela) ---------- */
   const fogEl = $('.codefog');
   if (fogEl) {
-    const CODE = `// fernando.ts — el perfil como interfaz
+    const CODE_ES = `// fernando.ts — el perfil como interfaz
 import { Spring, Angular, Postgres, Ionic } from "stack/core";
 
 export interface Candidato {
@@ -234,6 +234,70 @@ void elPerfilResponde200() {
     .then().statusCode(200)
          .body("rol", equalTo("Full Stack junior"));
 }`;
+    const CODE_EN = `// fernando.ts — the profile as an interface
+import { Spring, Angular, Postgres, Ionic } from "stack/core";
+
+export interface Candidate {
+  role: string;
+  stack: string[];
+  sales: string;
+  projects: string[];
+  available: string;
+}
+
+export const fernando: Candidate = {
+  role: "Full Stack junior",
+  stack: ["Java", "Spring Boot", "Angular", "TypeScript"],
+  extra: ["Ionic", "Capacitor", "PostgreSQL", "Docker"],
+  before: "9 years in marketing and business",
+  seeking: "software development internship, 2027",
+};
+
+// ProfileController.java — the same data, over an API
+@RestController
+@RequestMapping("/profile")
+@Validated
+public class ProfileController {
+
+  private final CandidatesRepository repo;
+
+  @GetMapping(value = "/fernando", produces = "application/json")
+  public ResponseEntity profile() {
+    var c = repo.findByName("Fernando Mínguez");
+    c.setAvailability(LocalDate.of(2027, 2, 1));
+    return ResponseEntity.ok(c);         // 200, as always
+  }
+
+  @GetMapping("/projects")
+  public List projects() {
+    return List.of(
+      new ProjectDto("Trazen",  "Angular · Spring · Capacitor"),
+      new ProjectDto("SitIn",   "Angular · Spring · PostGIS"),
+      new ProjectDto("2048",    "JavaScript · PWA · CI")
+    );
+  }
+}
+
+// InMemoryCandidates.java — the test database
+public class InMemoryCandidates implements CandidatesRepository {
+
+  private final Map data = new HashMap();
+
+  @Override
+  public Optional findByName(String name) {
+    var c = new Candidate("Fernando", "Full Stack junior");
+    return Optional.of(data.putIfAbsent(name, c));
+  }
+}
+
+// TESTS — the storm cache that already passed
+@Test
+void profileReturns200() {
+  given().get("/profile/fernando")
+    .then().statusCode(200)
+         .body("role", equalTo("Full Stack junior"));
+}`;
+    const CODE = document.documentElement.lang === 'en' ? CODE_EN : CODE_ES;
     // resaltado con la misma paleta del hero: comentarios, strings, palabras clave, anotaciones y llamadas
     const reg = /(\/\/[^\n]*)|("(?:[^"\\\n]|\\.)*")|(@\w+)|\b(?:export|interface|const|import|from|public|class|private|final|return|new|var|implements|void|given|get|then)\b|(\b[A-Za-z_]\w*\b(?=\s*:))|(\b[A-Za-z_]\w*(?=\())/g;
     const html = CODE.replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -273,8 +337,8 @@ void elPerfilResponde200() {
       const txt = b.dataset.copy;
       try { await navigator.clipboard.writeText(txt); }
       catch { const t = document.createElement('textarea'); t.value = txt; document.body.appendChild(t); t.select(); try { document.execCommand('copy'); } catch {} t.remove(); }
-      label.textContent = 'Copiado';
-      const toast = $('[data-toast]'); if (toast) toast.textContent = 'Correo copiado al portapapeles';
+      label.textContent = document.documentElement.lang === 'en' ? 'Copied' : 'Copiado';
+      const toast = $('[data-toast]'); if (toast) toast.textContent = document.documentElement.lang === 'en' ? 'Email copied to the clipboard' : 'Correo copiado al portapapeles';
       setTimeout(() => { label.textContent = orig; }, 1800);
     });
   });

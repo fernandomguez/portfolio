@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://fernandomguez.com/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://fernandomguez.com/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fernandomguez.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fernandomguez.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fernandomguez.com/"/>
+  </url>
+  <url>
+    <loc>https://fernandomguez.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://fernandomguez.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fernandomguez.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fernandomguez.com/"/>
+  </url>
 </urlset>
