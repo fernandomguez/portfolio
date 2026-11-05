@@ -131,3 +131,6 @@ Bloque v4 cerrado por Fernando el 2026-11-05. Sin tareas abiertas; solo quedan l
 - Actualizar este `ESTADO.md` cuando se pida o al cerrar un bloque.
 - No inventar proyectos, cifras ni enlaces; lo que no tiene enlace público se dice tal cual.
 - No publicar el teléfono ni capturas con datos reales (finanzas) de proyectos privados.
+
+## 2026-11-05: Queveo con nuevo look
+- Queveo pasa a la estética «Proyector» (noche morada, ojo con play como pupila, Unbounded). `public/assets/proj/queveo-mini.webp` regenerada con la captura nueva (880x435). **Pendiente:** desplegar el nuevo build a `gh-pages` para que la demo coincida con la captura.
