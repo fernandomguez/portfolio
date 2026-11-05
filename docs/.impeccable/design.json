@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-05T00:00:00Z",
+  "generatedAt": "2026-11-06T00:00:00Z",
   "title": "Design System: Fernando Mínguez Portfolio",
   "extensions": {
     "colorMeta": {
@@ -14,7 +14,7 @@
           "#1f2328",
           "#3a4048",
           "#5b6472",
-          "#7b8494",
+          "#6b7280",
           "#b4bcc9",
           "#e4e7ec"
         ]
@@ -85,26 +85,26 @@
         "canonical": "#f7f8fa",
         "tonalRamp": [
           "#5b6472",
-          "#7b8494",
+          "#6b7280",
           "#b4bcc9",
           "#e4e7ec",
-          "#eef0f4",
+          "#f1f3f6",
           "#f3f4f7",
           "#f7f8fa",
           "#ffffff"
         ]
       },
-      "thumb-tile": {
+      "pill-ground": {
         "role": "neutral",
-        "displayName": "Thumb Tile",
-        "canonical": "#eef0f4",
+        "displayName": "Pill Ground",
+        "canonical": "#f1f3f6",
         "tonalRamp": [
-          "#7b8494",
+          "#6b7280",
           "#b4bcc9",
           "#d3d8e0",
           "#e4e7ec",
           "#eef0f4",
-          "#f3f4f7",
+          "#f1f3f6",
           "#f7f8fa",
           "#ffffff"
         ]
@@ -112,12 +112,16 @@
     },
     "typographyMeta": {
       "display": {
+        "displayName": "Section Display",
+        "purpose": "Section headings: Algunos proyectos, Experiencia, ¿Hablamos?"
+      },
+      "hero-word": {
         "displayName": "Hero Word",
         "purpose": "The two hero words, sized by container width."
       },
       "headline": {
-        "displayName": "Section Heading",
-        "purpose": "Centred display-weight section heading."
+        "displayName": "Job and Group Heading",
+        "purpose": "Job names and Más proyectos."
       },
       "title": {
         "displayName": "Card Title",
@@ -125,32 +129,37 @@
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Page default and card text."
+        "purpose": "Page default, lede and card text."
       },
       "label": {
         "displayName": "Quiet Link",
-        "purpose": "Links with arrows and card links."
+        "purpose": "Links and chip buttons."
       },
       "mono": {
-        "displayName": "Stack Mono",
-        "purpose": "Code, stack lines and repo names only."
+        "displayName": "Mini Mono",
+        "purpose": "Code, mini names and the contact address only."
       }
     },
     "shadows": [
       {
         "name": "shadow",
         "value": "0 1px 3px rgba(31,35,40,.12), 0 1px 2px rgba(31,35,40,.06)",
-        "purpose": "Rest: cards, minis, hint pill."
+        "purpose": "Rest: cards, minis, contact cards, buttons."
       },
       {
         "name": "shadow-up",
         "value": "0 12px 30px rgba(31,35,40,.10), 0 2px 6px rgba(31,35,40,.06)",
-        "purpose": "Lift: hovered linked cards, tech chips."
+        "purpose": "Lift: hovered linked cards, minis and contact cards; tech chips and mini badges at rest."
       },
       {
         "name": "hairline",
         "value": "0 1px 0 #e4e7ec",
         "purpose": "Nav, hero and footer edges."
+      },
+      {
+        "name": "mockup",
+        "value": "0 18px 36px rgba(31,35,40,.22)",
+        "purpose": "Phone and browser frames inside project cards only."
       }
     ],
     "motion": [
@@ -160,9 +169,9 @@
         "purpose": "All transitions: lift, scale, parallax, smoke fade."
       },
       {
-        "name": "code-line",
-        "value": "typed on scroll into view, 0.6s stagger",
-        "purpose": "Hero code lines type in; code lights up under the cursor."
+        "name": "code-reveal",
+        "value": "radial mask under the cursor, .5s fade",
+        "purpose": "Desktop hero code lights up under the pointer; hidden on mobile."
       },
       {
         "name": "chip-bob",
@@ -174,20 +183,37 @@
       {
         "name": "chips-hide",
         "value": "1100px",
-        "purpose": "721px to 1100px: hero chips hidden (no room beside the portrait)."
+        "purpose": "721px to 1100px: hero chips hidden."
       },
       {
         "name": "chips-compact",
         "value": "1280px",
-        "purpose": "1101px to 1280px: chips in three columns, offsets at 60%."
+        "purpose": "1101px to 1280px: chips in three columns."
       },
       {
         "name": "code-hide",
-        "value": "1180px"
+        "value": "1180px",
+        "purpose": "Floating code hides."
+      },
+      {
+        "name": "nav-fold",
+        "value": "860px",
+        "purpose": "Nav links fold into a dropdown; experience rows stack."
       },
       {
         "name": "mobile",
-        "value": "720px"
+        "value": "720px",
+        "purpose": "Hero without smoke or code: static warm/cool washes, 1px divider, four ringed chips per side."
+      },
+      {
+        "name": "mobile-rhythm",
+        "value": "600px",
+        "purpose": "--sec-y 64px, chip buttons 44px, compact Experiencia (36px logo row, own-line role date, uppercase period label)."
+      },
+      {
+        "name": "tiny",
+        "value": "374px",
+        "purpose": "Only the LinkedIn nav icon hides."
       }
     ]
   },
@@ -198,39 +224,47 @@
       "refersTo": "nav-cta",
       "description": "Single pill button in the nav.",
       "html": "<a class=\"ds-cta\" href=\"#\">Contacto</a>",
-      "css": ".ds-cta{display:inline-block;background:var(--ink,#1f2328);color:#fff;padding:9px 18px;border-radius:99px;font-weight:600;text-decoration:none;transition:background .3s cubic-bezier(.16,1,.3,1)} .ds-cta:hover{background:#000} .ds-cta:focus-visible{outline:3px solid #6C8EF5;outline-offset:3px}"
+      "css": ".ds-cta{display:inline-block;background:var(--ink,#1f2328);color:#fff;padding:10px 18px;border-radius:99px;font-weight:600;text-decoration:none;transition:background .3s cubic-bezier(.16,1,.3,1)} .ds-cta:hover{background:#000} .ds-cta:focus-visible{outline:3px solid #6C8EF5;outline-offset:3px}"
     },
     {
       "name": "Project Card",
       "kind": "card",
       "refersTo": "card",
-      "description": "Main project card with grey thumbnail tile and mono stack line.",
-      "html": "<a class=\"ds-card\" href=\"#\"><div class=\"ds-thumb\"></div><div class=\"ds-body\"><div class=\"ds-title\">Trazen</div><div class=\"ds-meta\">Proyecto personal</div><div class=\"ds-stack\">Angular, Spring Boot</div></div></a>",
-      "css": ".ds-card{display:flex;flex-direction:column;width:280px;padding:10px 10px 4px;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(31,35,40,.12),0 1px 2px rgba(31,35,40,.06);text-decoration:none;color:#1f2328;transition:translate .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1)} .ds-card:hover{translate:0 -4px;box-shadow:0 12px 30px rgba(31,35,40,.10),0 2px 6px rgba(31,35,40,.06)} .ds-thumb{height:140px;border-radius:8px;background:#eef0f4} .ds-body{display:flex;flex-direction:column;gap:6px;padding:16px 10px 14px} .ds-title{font-size:1.3rem;font-weight:700;letter-spacing:-.02em;line-height:1.15} .ds-meta{font-size:.9rem;color:#5b6472} .ds-stack{font:500 .76rem/1.4 ui-monospace,Consolas,monospace;color:#5b6472;padding-top:10px}"
+      "description": "Main project card: tinted stage, mockup, 16px radius, Rest shadow.",
+      "html": "<a class=\"ds-card\" href=\"#\"><div class=\"ds-stage\"></div><div class=\"ds-body\"><div class=\"ds-title\">Trazen</div><div class=\"ds-meta\">Proyecto personal</div></div></a>",
+      "css": ".ds-card{display:flex;flex-direction:column;width:290px;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(31,35,40,.12),0 1px 2px rgba(31,35,40,.06);text-decoration:none;color:#1f2328;transition:translate .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1)} .ds-card:hover{translate:0 -4px;box-shadow:0 12px 30px rgba(31,35,40,.10),0 2px 6px rgba(31,35,40,.06)} .ds-stage{height:140px;background:linear-gradient(160deg,#e3e9ff,#fff 120%)} .ds-body{display:flex;flex-direction:column;gap:8px;padding:22px} .ds-title{font-size:1.4rem;font-weight:700;letter-spacing:-.03em;line-height:1.05} .ds-meta{font-size:.92rem;color:#5b6472}"
     },
     {
       "name": "Project Mini",
       "kind": "card",
       "refersTo": "project-mini",
-      "description": "Compact item in Más proyectos; unlinked variant has no hover.",
+      "description": "Compact item in Más proyectos; unlinked variant has a line border and no hover.",
       "html": "<div class=\"ds-mini\"><span class=\"ds-name\">daw-movies</span><span class=\"ds-desc\">Práctica de clase</span></div>",
-      "css": ".ds-mini{display:flex;flex-direction:column;gap:3px;width:260px;padding:14px 16px;background:#fff;border-radius:12px;box-shadow:0 1px 3px rgba(31,35,40,.12),0 1px 2px rgba(31,35,40,.06)} .ds-name{font:600 .9rem/1.3 ui-monospace,Consolas,monospace;color:#1f2328} .ds-desc{font-size:.9rem;color:#5b6472}"
+      "css": ".ds-mini{display:flex;flex-direction:column;gap:3px;width:260px;padding:14px 16px;background:#fff;border-radius:14px;box-shadow:0 1px 3px rgba(31,35,40,.12),0 1px 2px rgba(31,35,40,.06)} .ds-name{font:600 .9rem/1.3 ui-monospace,Consolas,monospace;color:#1f2328} .ds-desc{font-size:.9rem;color:#5b6472}"
     },
     {
       "name": "Tech Chip",
       "kind": "chip",
       "refersTo": "tech-chip",
-      "description": "Floating white squircle with a brand-coloured glyph; placed in a loose two-row grid beside the portrait, each with its own offset (--jx/--jy) and size (--z 2.7em-3.3em).",
+      "description": "Floating white squircle with a brand-coloured glyph; on mobile ringed 2px in coral (marketing) or blue (development).",
       "html": "<span class=\"ds-chip\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 2l9 5v10l-9 5-9-5V7z\"/></svg></span>",
       "css": ".ds-chip{display:grid;place-items:center;width:3em;height:3em;font-size:16px;border-radius:28%;background:#fff;color:#DD0031;box-shadow:0 12px 30px rgba(31,35,40,.10),0 2px 6px rgba(31,35,40,.06);animation:ds-bob 5.5s ease-in-out infinite} .ds-chip svg{width:56%;height:56%;fill:currentColor} @keyframes ds-bob{50%{translate:0 -8px}}"
+    },
+    {
+      "name": "Stack Pill",
+      "kind": "chip",
+      "refersTo": "pill",
+      "description": "Rounded pill with a small icon inside a stack group.",
+      "html": "<span class=\"ds-pill\">Angular</span>",
+      "css": ".ds-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:99px;background:#f1f3f6;color:#1f2328;font-size:.86rem;font-weight:500}"
     },
     {
       "name": "Hero Word",
       "kind": "custom",
       "refersTo": "display",
-      "description": "Display title; the side under the cursor leads and the other turns soft.",
+      "description": "Hero title; the side under the cursor leads and the other turns soft (mouse only).",
       "html": "<p class=\"ds-word\">marketing</p>",
-      "css": ".ds-word{font-size:3.5rem;font-weight:700;letter-spacing:-.04em;line-height:1;color:#1f2328;transition:color .6s cubic-bezier(.16,1,.3,1)} .ds-word:hover{color:#7b8494}"
+      "css": ".ds-word{font-size:3.5rem;font-weight:700;letter-spacing:-.04em;line-height:1;color:#1f2328;transition:color .6s cubic-bezier(.16,1,.3,1)} .ds-word:hover{color:#6b7280}"
     },
     {
       "name": "Up-tab",
@@ -243,20 +277,19 @@
   ],
   "narrative": {
     "northStar": "One Face, Two Readings",
-    "overview": "A white, airy page following the user-pinned references (adhamdannaway.com for the split face and soft cards, aaabadcode.com for the pastel fluid smoke). One oversized head, raised so more of the torso shows, stands in the centre of a single scene. Left of it thin pastel smoke follows the cursor (marketing); right of it syntax-coloured code lights up under the cursor beside floating tech chips (development). Everything below the hero is quiet so the portrait carries the identity.\n\nColour is rationed to two places: the smoke and the brand-coloured chips. Elsewhere the page is ink on white and pale grey. Depth comes from soft layered shadows and hairline rules. The page is static and light: Figtree self-hosted, no libraries, WebGL smoke loaded after load for fine pointers only, CSS blobs as fallback. The tech chips never touch the body: they sit in a loose, hand-placed-looking grid on each side of the photo.",
+    "overview": "A white, airy page following the pinned references (adhamdannaway.com for the split face and soft cards, aaabadcode.com for the pastel fluid smoke). One oversized head, cropped below the collar, stands in the centre of a single scene: marketing on the left, development on the right. On desktop with a fine pointer, thin pastel smoke follows the cursor on the left and syntax-coloured code lights up under it on the right. On mobile (720px and below) there is no smoke and no code: two static washes, warm on the left and cool on the right, with a 1px divider tell the same split. Everything below the hero is quiet.\n\nColour is rationed: smoke or washes in the hero, brand-coloured glyphs in white chips, tiny pastel marks elsewhere. Depth comes from soft layered shadows and hairline rules. The page is static and light: Figtree self-hosted, no libraries, and smoke.js is imported only after load for fine pointers without reduced motion.",
     "keyCharacteristics": [
-      "White ground, one pale band for projects, hairline dividers.",
-      "Single-scene hero: transparent portrait raised to -0.03 of hero height, side-faded on desktop; the title under the cursor leads.",
-      "Chips float in a loose two-row grid beside the portrait, hidden from 721px to 1100px.",
-      "Figtree variable for all human text; system mono only for code and stack lines.",
-      "White cards and minis, 12px radius, two-layer soft shadows, lift on hover when linked.",
-      "Stack groups: bordered 12px groups in a 3-column grid, six cells for seven groups (Herramientas and Producto stacked in one).",
-      "Spanish copy; nothing invented as proof."
+      "White ground, two pale bands (projects, contact), hairline dividers.",
+      "Single-scene hero: one transparent portrait, chips float beside it and never touch the body.",
+      "Mobile hero: no smoke or code, static warm and cool washes with a 1px divider and ringed chips.",
+      "Figtree variable for all human text; system mono only for code, repo names and the address.",
+      "White cards, 16px radius, two-layer soft shadows, lift on hover when linked.",
+      "Spanish copy with an English twin; nothing invented as proof."
     ],
     "rules": [
       {
         "name": "The Paint Rule",
-        "body": "Pastels live in the smoke. Elsewhere they are tiny marks only, never fills, buttons or card colours.",
+        "body": "Pastels live in the hero (smoke on desktop, washes on mobile). Elsewhere they are tiny marks only, never fills, buttons or card colours.",
         "section": "colors"
       },
       {
@@ -271,7 +304,7 @@
       },
       {
         "name": "The One Family Rule",
-        "body": "Figtree for everything human-readable; mono only for literal code, stack names and repo names.",
+        "body": "Figtree for everything human-readable; mono only for literal code, repo names and the address.",
         "section": "typography"
       },
       {
@@ -281,22 +314,25 @@
       }
     ],
     "dos": [
-      "Do keep pastel colour inside the smoke; keep brand colours inside white chips.",
+      "Do keep pastel colour inside the hero (smoke on desktop, washes on mobile); keep brand colours inside white chips.",
       "Do use ink and muted for text, line hairlines for structure.",
-      "Do give raised objects the Rest shadow; lift only linked cards and minis.",
-      "Do keep radii to 8px, 12px, 28% (chips) and 99px.",
-      "Do use cubic-bezier(.16,1,.3,1) for transitions and honour prefers-reduced-motion and (pointer: fine) for heavy effects.",
+      "Do give raised objects the Rest shadow; lift only linked cards, minis and contact cards.",
+      "Do build grids with minmax(min(Npx, 100%), 1fr) so a column never exceeds a narrow viewport.",
+      "Do use --sec-y (64px) as the vertical step between sections at 600px and below.",
+      "Do use cubic-bezier(.16,1,.3,1) for transitions and honour prefers-reduced-motion and (pointer: fine) for heavy effects; load smoke.js only for fine pointers.",
       "Do keep interactive targets at least 44px tall and the 3px blue focus ring visible.",
-      "Do keep first load tiny: self-hosted Figtree, no libraries, smoke loaded after load.",
-      "Do keep chips outside the portrait and give each one its own small offset so the cluster reads as hand-placed."
+      "Do keep copy in the half it belongs to.",
+      "Do separate fields with |, lists with commas and date ranges with a short hyphen and spaces."
     ],
     "donts": [
       "Don't fill buttons, cards or sections with the pastel accents.",
-      "Don't add dark themes or dark sections.",
+      "Don't add dark themes or dark sections (the phone bezel inside a project card is a device frame, not a surface).",
       "Don't use hard offset shadows, coloured glows or heavy borders.",
+      "Don't put controls, labels or chips on the face or the body.",
       "Don't introduce a second text family or set prose in mono.",
+      "Don't show smoke or code in the mobile hero.",
       "Don't invent proof (clients, metrics, testimonials) or link unlinked minis.",
-      "Don't use the middle dot as a separator in copy, titles or meta: use |, commas in lists and a short hyphen with spaces in date ranges."
+      "Don't use the middle dot as a separator in copy, titles or meta."
     ]
   }
 }
