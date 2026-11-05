@@ -171,7 +171,7 @@ Cool neutral greys on white, with four candy-bright pastels that behave like pai
 
 ## Layout
 
-Full-width bands: sticky 64px nav, hero, projects band, footer. Content wraps at 1240px with a fluid gutter (`clamp(20px, 4vw, 56px)`). The hero is a three-column grid (marketing copy, portrait column sized from hero height, development copy), height `clamp(560px, 100svh - nav, 820px)`. The photo box is 1.28x hero height with its top at 0.08 of hero height, so the shoulders fall outside the frame. Copy sits inside each half's layer, so the wipe reveals it. Project cards use an auto-fit grid (`minmax(270px, 1fr)`); minis use `minmax(260px, 1fr)` with 12px gap. Section padding `clamp(48px, 7vw, 96px)` top, `clamp(64px, 9vw, 120px)` bottom. At 1180px and below the floating code hides. At 720px and below the hero uses two equal columns, photo box at 1x height and top 0.3, chips reduce to four stacked at the right edge, thumbnails drop to 190px.
+Full-width bands: sticky 64px nav, hero, projects band, footer. Content wraps at 1240px with a fluid gutter (`clamp(20px, 4vw, 56px)`). The hero is a three-column grid (marketing copy, portrait column sized from hero height, development copy), height `clamp(560px, 100svh - nav, 820px)`. The photo box is 1.28x hero height with its top at -0.03 of hero height (raised on 2026-11-05 so the face sits near the vertical middle and more torso shows). From 721px up the photo fades to transparent over its outer 12% on each side, so the cropped shoulders never end in a hard vertical edge. Copy sits inside each half's layer, so the wipe reveals it. Project cards use an auto-fit grid (`minmax(270px, 1fr)`); minis use `minmax(260px, 1fr)` with 12px gap. Section padding `clamp(48px, 7vw, 96px)` top, `clamp(64px, 9vw, 120px)` bottom. At 1180px and below the floating code hides; from 721px to 1100px the hero chips are hidden too (no room beside the portrait). At 720px and below the hero uses two equal columns, photo box at 1x height and top 0.3, chips reduce to four stacked at the right edge, thumbnails drop to 190px.
 
 ## Elevation & Depth
 
@@ -206,10 +206,14 @@ Sticky white bar, hairline underline, wordmark left (700), links right in `muted
 - **Lead emphasis:** by seam position, the larger side's title scales 1.05 and the other side's title turns `soft`; when development leads, chips scale 1.12 (0.6s expo-out).
 - **Inert copy:** each half's copy lives inside its own layer and becomes `inert` when that half is mostly hidden (marketing under 15, development over 85).
 - **Marketing half:** thin pastel WebGL fluid smoke with a rainbow hue trail (`smoke.js`), canvas fades in over 1.2s; loaded after `load`, fine pointer only, skipped for reduced motion. Fallback is four CSS radial blobs in the pastels. Copy over it is `ink` with a white text-shadow halo.
-- **Development half:** syntax-coloured mono code lines that type in with staggered 0.6s delays on a 10s loop, a blinking ink caret, and nine white tech chips (28% radius, Lift shadow, brand-coloured glyph, sizes 2.6em-3.3em) that bob and shift with pointer parallax (per-chip factor `--k`).
+- **Development half:** syntax-coloured mono code lines that type in with staggered 0.6s delays on a 10s loop, a blinking ink caret, and nine white tech chips (28% radius, Lift shadow, brand-coloured glyph) that bob and shift with pointer parallax (per-chip factor `--k`).
+- **Chip placement (both halves):** chips never touch the body. They sit in a loose two-row grid beside the portrait: column 0 starts a fixed gap outside the photo edge and columns open toward the screen edge (`--pitch`, capped at 5.8em). Each chip has its own offset (`--jx`, `--jy`, in em) and size (`--z`, 2.7em-3.3em) so the cluster looks hand-placed, not rigid. Development: Angular, TypeScript, Java, Spring Boot, Docker / Git, GitHub, OpenCode, Claude. Marketing: Analytics, Ads, Odoo / Looker, Power BI, Zoho. From 1101px to 1280px: three columns, up to three rows, offsets at 60%.
 
 ### Up-tab footer (signature)
 White footer with hairline top edge and a 74x24 half-pill tab rising 23px above it holding a chevron-up back to top. Centred below: ask (600), link row (600, 2px coral underline, blue on hover), small note, copyright.
+
+### Stack groups
+The Experiencia section lists the stack in a 3-column grid of 12px bordered groups (`.stack__g`, hairline border, no shadow) that hold icon pills. Six grid cells for seven groups: "Herramientas de desarrollo" and "Producto y plataformas" share one cell, stacked (`.stack__col`, 16px gap). Order: Stack principal, APIs/arquitectura/testing, [Herramientas + Producto], Complementarias (vistas en formación), IA aplicada, Marketing y negocio. UX/UI is no longer listed on the web.
 
 ### Section headings
 Display-weight centred h2 ("Algunos trabajos") in `ink`, large and tightly tracked, with no ornament around it.
@@ -233,3 +237,4 @@ Display-weight centred h2 ("Algunos trabajos") in `ink`, large and tightly track
 - **Don't** put controls or labels on the face; the grip sits on the neck.
 - **Don't** introduce a second text family or set prose in mono.
 - **Don't** invent proof (clients, metrics, testimonials) or link unlinked minis.
+- **Don't** use the middle dot `·` as a separator in copy, titles or meta (it reads as generated text): use `|` between fields ("Fernando Mínguez | Desarrollador full stack junior"), commas in lists and a short hyphen with spaces in date ranges ("Oct 2022 - Ene 2026").
