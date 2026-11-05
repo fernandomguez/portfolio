@@ -116,12 +116,18 @@
       hero.addEventListener('pointerdown', onTouch, { passive: true });
       hero.addEventListener('pointermove', onTouch, { passive: true });
 
+      let lastY = scrollY, sv = 0;
       const loop = now => {
         if (!fx.running) return;
         fx.frame++;
+        // scroll: el progreso por el hero dirige la linterna y la velocidad remueve el humo
+        const y = scrollY, sdy = y - lastY; lastY = y;
+        sv += (Math.abs(sdy) - sv) * .25;
+        const sp = clamp(y / (hero.offsetHeight * .9), 0, 1);
         let tx, ty, src = 0;
         if (now - fx.touch.at < 1600) { tx = fx.touch.x; ty = fx.touch.y; src = 1; }
         else if (now - fx.tilt.at < 900) { tx = fx.tilt.x; ty = fx.tilt.y; src = 2; }
+        else if (sp > .02) { tx = sp * 1.8 - .9; ty = sp * 1.5 - .75; src = 4; }
         else { const t = (now - fx.t0) / 1000; tx = Math.sin(t * .5) * .85; ty = Math.cos(t * .37) * .6; src = 3; }
         fx.nx += (tx - fx.nx) * .08; fx.ny += (ty - fx.ny) * .08;
         const { nx, ny } = fx;
@@ -134,7 +140,8 @@
           lamp.heat = 165; lamp.on = true; lampMove();
         }
         // humo: inclinación/deriva mueven el punto por la mitad izquierda (el dedo ya lo empuja en onTouch)
-        if (smoke && src !== 1 && fx.frame % 2 === 0) smoke.push(.05 + (nx * .5 + .5) * .5, .12 + (ny * .5 + .5) * .62, 2.2);
+        if (smoke && sv > 1) { const g = Math.min(3.2, sv * .4); smoke.push(.12 + sp * .76, .2 + (fx.frame % 40) / 40 * .55, g); smoke.push(.88 - sp * .76, .75 - (fx.frame % 40) / 40 * .55, g); }
+        else if (smoke && src !== 1 && fx.frame % 2 === 0) smoke.push(.05 + (nx * .5 + .5) * .5, .12 + (ny * .5 + .5) * .62, 2.2);
         requestAnimationFrame(loop);
       };
       const run = on => { if (on && !fx.running && !document.hidden) { fx.running = true; requestAnimationFrame(loop); } else if (!on) fx.running = false; };
@@ -162,8 +169,8 @@
   /* ---------- smoke (mouse + WebGL2 + no reduced motion; loaded after the page is ready) ---------- */
   const canvas = $('.smoke');
   const lowPower = !!(navigator.connection && navigator.connection.saveData) || (navigator.deviceMemory && navigator.deviceMemory <= 2);
-  if (hero && canvas && !reduced && (fine || (touchFx && !lowPower))) {
-    const go = () => import('./smoke.js').then(m => { smoke = m.default(canvas, hero, { low: !fine }); if (smoke) canvas.classList.add('on'); }).catch(() => {});
+  if (hero && canvas && !reduced && fine) {
+    const go = () => import('./smoke.js').then(m => { smoke = m.default(canvas, hero, { low: !fine, full: !fine }); if (smoke) canvas.classList.add('on'); }).catch(() => {});
     const later = () => ('requestIdleCallback' in window ? requestIdleCallback(go, { timeout: 2500 }) : setTimeout(go, 800));
     document.readyState === 'complete' ? later() : addEventListener('load', later, { once: true });
   }

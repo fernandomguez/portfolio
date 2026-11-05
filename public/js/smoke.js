@@ -91,11 +91,11 @@ void main(){vUv=p*.5+.5;vL=vUv-vec2(t.x,0);vR=vUv+vec2(t.x,0);vT=vUv+vec2(0,t.y)
 
   let last = null, travel = 0, moved = 0, on = false, prev = 0, nextAuto = 0;
   const move = (x, y, w, h, gain = 1) => {
-    if (x > .62) { last = null; return; }
+    if (!opts.full && x > .62) { last = null; return; }
     if (last) {
       const dx = x - last[0], dy = y - last[1];
       travel += Math.abs(dx * w) + Math.abs(dy * h);
-      if (dx || dy) splat(x, y, dx * 7000 * gain, dy * 7000 * gain, hue(travel / 900), .28);
+      if (dx || dy) splat(x, y, dx * 7000 * gain, dy * 7000 * gain, hue(travel / 900 + (opts.full && x > .5 ? .45 : 0)), .28);
     }
     last = [x, y]; moved = performance.now();
   };
