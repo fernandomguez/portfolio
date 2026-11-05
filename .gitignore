@@ -15,3 +15,9 @@ node_modules/
 package-lock.json
 # CV (no publicado de momento)
 cv/
+
+# Notas y capturas internas (docs)
+docs/.impeccable/review/
+docs/.impeccable/hook.cache.json
+docs/capturas/
+docs/ESTADO.md
