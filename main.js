@@ -69,7 +69,7 @@
     const SN = [
       [['c', '// fernando.ts\n'], ['k', 'const'], ['', ' fernando = {\n  '], ['p', 'rol'], ['', ': '], ['s', '"Full Stack junior"'], ['', ',\n  '],
         ['p', 'stack'], ['', ': ['], ['s', '"Java"'], ['', ', '], ['s', '"Spring"'], ['', ', '], ['s', '"Angular"'], ['', '],\n  '],
-        ['p', 'antes'], ['', ': '], ['s', '"9 años en marketing"'], ['', ',\n  '], ['p', 'busco'], ['', ': '], ['s', '"prácticas DAW 2027"'], ['', ',\n};']],
+        ['p', 'antes'], ['', ': '], ['s', '"marketing y negocio"'], ['', ',\n  '], ['p', 'busco'], ['', ': '], ['s', '"prácticas 2027"'], ['', ',\n};']],
       [['c', '// PerfilController.java\n'], ['f', '@GetMapping'], ['', '('], ['s', '"/perfil"'], ['', ')\n'], ['k', 'public'], ['', ' Perfil '], ['f', 'perfil'], ['', '() {\n  '],
         ['k', 'return new'], ['', ' Perfil(\n    '], ['s', '"Fernando"'], ['', ',\n    List.'], ['f', 'of'], ['', '('], ['s', '"Java"'], ['', ', '], ['s', '"Angular"'], ['', ')\n  );\n}']]
     ];

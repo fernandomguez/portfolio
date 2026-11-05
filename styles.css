@@ -63,12 +63,8 @@ p{text-wrap:pretty}
 .copy--mk .title{transform-origin:left center}
 .copy--dev .title{transform-origin:right center}
 .copy p{margin-top:.7rem;max-width:32ch;font-size:clamp(.88rem,1.15vw,1.05rem);line-height:1.5;color:var(--muted)}
-.copy--mk p,.copy--mk .more{color:var(--ink);text-shadow:0 0 10px rgba(255,255,255,.95),0 0 3px rgba(255,255,255,.95)}
+.copy--mk p{color:var(--ink);text-shadow:0 0 10px rgba(255,255,255,.95),0 0 3px rgba(255,255,255,.95)}
 .copy--dev p{margin-left:auto}
-.more{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin-top:.4rem;font-weight:600;font-size:.92rem;color:var(--ink);text-decoration:none}
-.more::after{content:"";width:16px;height:16px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat;transition:translate .3s var(--ease)}
-.more:hover::after{translate:4px 0}
-.more:hover{text-decoration:underline;text-underline-offset:5px}
 /* the side under the pointer leads (set in main.js; mouse only) */
 .hero[data-lead=mk] .copy--dev .title,.hero[data-lead=dev] .copy--mk .title{color:var(--soft)}
 .hero[data-lead=mk] .copy--mk .title,.hero[data-lead=dev] .copy--dev .title{scale:1.05}
@@ -183,7 +179,7 @@ p{text-wrap:pretty}
 .up:hover{color:var(--ink)}
 
 /* narrower screens */
-@media (max-width:1180px){.codebg{display:none}.chips:not(.chips--mk) .chip:nth-child(n+7){display:none}.chips--mk .chip:nth-child(n+6){display:none}}
+@media (max-width:1180px){.codebg{display:none}.chips:not(.chips--mk) .chip:nth-child(n+7){display:none}.chips--mk .chip:nth-child(n+5){display:none}}
 @media (max-width:860px){
   .nav{grid-template-columns:1fr auto}
   .nav__links{display:none;position:absolute;top:var(--nav-h);left:0;right:0;flex-direction:column;gap:0;padding:8px var(--gut) 16px;background:#fff;box-shadow:0 12px 24px rgba(31,35,40,.08),0 1px 0 var(--line)}
@@ -195,7 +191,7 @@ p{text-wrap:pretty}
   .jobs>li{grid-template-columns:1fr;gap:6px}
 }
 @media (max-width:720px){
-  .hero{--hh:clamp(600px,calc(100svh - var(--nav-h)),780px);--H:1;--top:.3;grid-template-columns:1fr 1fr}
+  .hero{--hh:clamp(600px,calc(100svh - var(--nav-h)),780px);--H:1;--top:.36;grid-template-columns:1fr 1fr}
   .chips--mk{display:none}
   .chips:not(.chips--mk) .chip:nth-child(n+5){display:none}
   .chips:not(.chips--mk) .chip{left:auto!important;right:10px;--s:2.6em}
