@@ -89,6 +89,31 @@ p{text-wrap:pretty}
 .chip__in{display:grid;place-items:center;width:100%;height:100%;border-radius:28%;background:#fff;color:var(--c);box-shadow:var(--shadow-up);animation:bob var(--b) ease-in-out infinite;transition:scale .6s var(--ease)}
 .chip svg{width:56%;height:56%}
 .chips--mk .chip{left:auto;right:min(calc(50% + var(--pc) * .5 + var(--ox,0px)),calc(100% - 4.4em));translate:calc(var(--lx,0) * var(--k) * 1px) calc(var(--ly,0) * var(--k) * 1px)}
+/* iconos en rejilla ordenada, siempre fuera de la foto (escritorio): columna 0 pegada al borde de la foto, dos filas */
+@media (min-width:721px){
+  .hero{--bw:calc(var(--hh) * var(--H) * .784);--gap:clamp(14px,2vw,34px)}
+  .chip{--s:3em!important;--pitch:min(4.2em,calc((50% - var(--bw) / 2 - var(--gap) - 3em - 8px) / 4));left:calc(50% + var(--bw) / 2 + var(--gap) + var(--cx) * var(--pitch));top:calc(70% + var(--ry) * 12%)!important}
+  .chips--mk .chip{left:auto;right:calc(50% + var(--bw) / 2 + var(--gap) + var(--cx) * var(--pitch))}
+  /* desarrollo: Angular+TypeScript, Java+Spring Boot+Docker / Git+GitHub, OpenCode+Claude */
+  .chips:not(.chips--mk) .chip:nth-child(1){--cx:0;--ry:0}.chips:not(.chips--mk) .chip:nth-child(2){--cx:1;--ry:0}
+  .chips:not(.chips--mk) .chip:nth-child(3){--cx:2;--ry:0}.chips:not(.chips--mk) .chip:nth-child(4){--cx:3;--ry:0}
+  .chips:not(.chips--mk) .chip:nth-child(7){--cx:4;--ry:0}
+  .chips:not(.chips--mk) .chip:nth-child(5){--cx:0;--ry:1}.chips:not(.chips--mk) .chip:nth-child(6){--cx:1;--ry:1}
+  .chips:not(.chips--mk) .chip:nth-child(8){--cx:2;--ry:1}.chips:not(.chips--mk) .chip:nth-child(9){--cx:3;--ry:1}
+  /* marketing: Analytics+Ads+Odoo / Looker+Power BI+Zoho */
+  .chips--mk .chip:nth-child(1){--cx:0;--ry:0}.chips--mk .chip:nth-child(2){--cx:1;--ry:0}.chips--mk .chip:nth-child(5){--cx:2;--ry:0}
+  .chips--mk .chip:nth-child(3){--cx:0;--ry:1}.chips--mk .chip:nth-child(4){--cx:1;--ry:1}.chips--mk .chip:nth-child(6){--cx:2;--ry:1}
+}
+/* anchos medios: tres columnas y hasta tres filas; por debajo de 1000px la foto ocupa casi todo el ancho y los iconos se ocultan */
+@media (min-width:721px) and (max-width:1280px){
+  .chip{--pitch:min(4.2em,calc((50% - var(--bw) / 2 - var(--gap) - 3em - 8px) / 2));top:calc(60% + var(--ry) * 10%)!important}
+  .chips:not(.chips--mk) .chip:nth-child(1){--cx:0;--ry:0}.chips:not(.chips--mk) .chip:nth-child(2){--cx:1;--ry:0}.chips:not(.chips--mk) .chip:nth-child(3){--cx:2;--ry:0}
+  .chips:not(.chips--mk) .chip:nth-child(4){--cx:0;--ry:1}.chips:not(.chips--mk) .chip:nth-child(5){--cx:1;--ry:1}.chips:not(.chips--mk) .chip:nth-child(6){--cx:2;--ry:1}
+  .chips:not(.chips--mk) .chip:nth-child(7){--cx:0;--ry:2}.chips:not(.chips--mk) .chip:nth-child(8){--cx:1;--ry:2}.chips:not(.chips--mk) .chip:nth-child(9){--cx:2;--ry:2}
+  .chips--mk .chip:nth-child(1){--cx:0;--ry:0}.chips--mk .chip:nth-child(2){--cx:1;--ry:0}.chips--mk .chip:nth-child(3){--cx:2;--ry:0}
+  .chips--mk .chip:nth-child(4){--cx:0;--ry:1}.chips--mk .chip:nth-child(5){--cx:1;--ry:1}.chips--mk .chip:nth-child(6){--cx:2;--ry:1}
+}
+@media (min-width:721px) and (max-width:1000px){.chips{display:none}}
 .hero[data-lead=mk] .chips--mk .chip__in{scale:1.1}
 @keyframes bob{50%{translate:0 -8px}}
 .hero[data-lead=dev] .chips:not(.chips--mk) .chip__in{scale:1.1}
