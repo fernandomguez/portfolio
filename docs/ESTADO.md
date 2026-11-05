@@ -3,7 +3,7 @@
 Última actualización: 2026-11-05 (v5, textos + rejilla de Formación en dos columnas). Archivo para ver de un vistazo qué hemos hecho, qué estamos haciendo y hacia dónde vamos. Se actualiza cuando Fernando lo pide o al cerrar un bloque de trabajo.
 
 ## Qué es
-Portfolio personal de **Fernando Mínguez** (con tilde, confirmado): desarrollador full stack junior con 9 años en marketing y operaciones, que busca **prácticas de DAW/DAM en febrero–marzo de 2027**. Web estática (HTML, CSS y JS sin frameworks), ligera, en una sola página. Inspirada en adhamdannaway.com (cara partida y menú), aaabadcode.com (humo de colores), majd-portfolio (frase que se enciende al hacer scroll) y fmorenil.dev (tarjetas con mockups).
+Portfolio personal de **Fernando Mínguez** (con tilde, confirmado): desarrollador full stack junior con 9 años en marketing y operaciones, que busca **prácticas de DAW/DAM en marzo de 2027**. Web estática (HTML, CSS y JS sin frameworks), ligera, en una sola página. Inspirada en adhamdannaway.com (cara partida y menú), aaabadcode.com (humo de colores), majd-portfolio (frase que se enciende al hacer scroll) y fmorenil.dev (tarjetas con mockups).
 
 Ver en local: `python -m http.server 5173 --directory public` desde esta carpeta y abrir `http://localhost:5173/index.html`.
 
@@ -41,7 +41,7 @@ Hecha por el agente auditor el 05-11-2026 tras la reorganización (el 3.º bucle
    - **Experiencia:** perfil técnico reescrito (Java/Spring Boot, Angular, tests y trabajo con agentes de IA: especifico, reviso, valido); **Numik Labs separado** como "Proyecto emprendedor"; ValgrAI, Binoovo y Way to Blue reescritos sin "liderar" ni "equipos técnicos"; soft skills concretas; enlace "Experiencia anterior y detalle completo en LinkedIn".
    - **Stack por nivel:** Stack principal, APIs/arquitectura/testing, Herramientas, Producto y plataformas, IA, Marketing y negocio y **Complementarias (vistas en formación)** con MySQL, MariaDB, MongoDB, Swagger, Postman, ArchUnit, Mutation testing, Angular Material, Sass y Microservicios. No se eliminó ninguna tecnología.
    - **Proyectos:** Trazen y 2048 "Publicado", SitIn "En desarrollo"; PokeAPI y daw-movies marcados como "Ejercicio de aprendizaje"; Gestión Monetaria como proyecto personal.
-   - **Contacto:** prácticas de desarrollo de software en febrero–marzo de 2027.
+   - **Contacto:** prácticas de desarrollo de software en marzo de 2027.
    - **Ajustes posteriores:** logo de Spring Boot cambiado a la hoja verde; en el hero Marketing quedan seis iconos de herramientas (Google Analytics, Google Ads, Looker, Power BI junto a Looker, Odoo y Mailchimp), sin Canva, HubSpot, flecha ni maletín; en Desarrollo los iconos van agrupados por afinidad (Angular+TypeScript, Java+Spring Boot+Docker, Git+GitHub, OpenCode+Claude Code); salto de línea tras "automatizados." en el perfil; "Autonomía, demostrada en proyectos propios."; en el stack se quitaron Microservicios, HubSpot y GitHub Actions; en las tarjetas se quitaron las etiquetas PostGIS, PWA, CI y Capacitor.
    - Verificado contra tus carpetas: Java/Spring, Angular, JavaScript, PostgreSQL/PostGIS, Docker, JUnit/Mockito y Capacitor/Ionic tienen uso en proyectos propios; MySQL/MariaDB, ArchUnit, Swagger y mutation testing solo en ejercicios del ciclo.
 
