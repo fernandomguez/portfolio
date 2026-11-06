@@ -89,7 +89,8 @@ void main(){vUv=p*.5+.5;vL=vUv-vec2(t.x,0);vR=vUv+vec2(t.x,0);vT=vUv+vec2(0,t.y)
   };
   const burst = () => { const n = 5 + (Math.random() * 2 | 0); for (let i = 0; i < n; i++) stroke(); };
 
-  let last = null, travel = 0, moved = 0, on = false, prev = 0, nextAuto = 0;
+  const t0 = performance.now();
+  let last = null, travel = 0, moved = 0, on = false, prev = 0, nextAuto = t0 + 1100;
   const move = (x, y, w, h, gain = 1) => {
     if (!opts.full && x > .62) { last = null; return; }
     if (last) {
@@ -118,14 +119,20 @@ void main(){vUv=p*.5+.5;vL=vUv-vec2(t.x,0);vR=vUv+vec2(t.x,0);vT=vUv+vec2(0,t.y)
     for (let i = 0; i < 14; i++) { run(P.pres, prs.w, { p: prs.r, d: div }); prs.swap(); }
     run(P.grad, vel.w, { p: prs.r, v: vel.r }); vel.swap();
     run(P.adv, vel.w, { v: vel.r, s: vel.r }, { dt: [dt], k: [.35] }); vel.swap();
-    run(P.adv, dye.w, { v: vel.r, s: dye.r }, { dt: [dt], k: [1.3] }); dye.swap();
+    run(P.adv, dye.w, { v: vel.r, s: dye.r }, { dt: [dt], k: [1.3 * Math.min(1, Math.max(0, (now - t0 - 700) / 700))] }); dye.swap();
     run(P.show, null, { u: dye.r });
     requestAnimationFrame(frame);
   };
   const play = () => { if (!on) { on = true; prev = performance.now(); requestAnimationFrame(frame); } };
   const pause = () => { on = false; };
 
-  burst();
+  // el lienzo arranca pintado con el mismo degradado del CSS, así el fundido entre ambos no se nota
+  const seed = () => {
+    for (const [x, y, c, k] of [[.24, .36, [242, 139, 130], .95], [.36, .70, [249, 199, 79], .9], [.14, .70, [127, 207, 198], .95], [.42, .16, [108, 142, 245], .85]]) {
+      run(P.splat, dye.w, { u: dye.r }, { pt: [x, y], c: [c[0] / 255 * k, c[1] / 255 * k, c[2] / 255 * k, k], r: [.07], ar: [asp] }); dye.swap();
+    }
+  };
+  seed();
   const visible = { v: true };
   new IntersectionObserver(([en]) => { visible.v = en.isIntersecting; visible.v && !document.hidden ? play() : pause(); }).observe(host);
   document.addEventListener('visibilitychange', () => { document.hidden ? pause() : visible.v && play(); });
